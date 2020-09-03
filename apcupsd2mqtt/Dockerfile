@@ -6,9 +6,9 @@ FROM ${BUILD_FROM}
 COPY rootfs /
 
 # Setup base
-RUN apk add --no-cache \
-    coreutils=8.32-r0 \
-    apcupsd=3.14.14
+RUN apk update
+RUN apk add --no-cache coreutils=8.32-r0
+RUN apk add --upgrade apcupsd
 
 # Build arguments
 ARG BUILD_ARCH
