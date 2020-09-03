@@ -31,7 +31,7 @@ LABEL \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.url="https://addons.community" \
     org.opencontainers.image.source="https://github.com/demey/hassio-addons/apcupsd2mqtt" \
-    org.opencontainers.image.documentation="https://github.com/demey/hassio-addons/README.md" \
+    org.opencontainers.image.documentation="https://github.com/demey/hassio-addons/blob/master/README.md" \
     org.opencontainers.image.created=${BUILD_DATE} \
     org.opencontainers.image.revision=${BUILD_REF} \
     org.opencontainers.image.version=${BUILD_VERSION}
