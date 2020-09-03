@@ -3,7 +3,7 @@
   "version": "dev",
   "slug": "apcupsd2mqtt",
   "description": "Home Assistant Add-on apcupsd2mqtt",
-  "url": "https://github.com/demey/hassio-addons/apcupsd2mqtt",
+  "url": "https://github.com/demey/hassio-addons/tree/master/apcupsd2mqtt",
   "startup": "application",
   "init": false,
   "arch": ["aarch64", "amd64", "armhf", "armv7", "i386"],
