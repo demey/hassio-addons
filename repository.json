@@ -1,0 +1,5 @@
+﻿{
+  "name": "apcupsd2mqtt Hass.io Add-on",
+  "url": "https://github.com/demey/hassio-addons",
+  "maintainer": "Igor Kochubynskyi <igor.kochubinskiy@gmail.com>"
+}
