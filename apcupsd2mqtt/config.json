@@ -1,6 +1,6 @@
 {
   "name": "apcupsd2mqtt",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "slug": "apcupsd2mqtt",
   "description": "Home Assistant Add-on apcupsd2mqtt",
   "url": "https://github.com/demey/hassio-addons/tree/master/apcupsd2mqtt",
