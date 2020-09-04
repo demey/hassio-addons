@@ -1,6 +1,6 @@
 {
   "name": "apcupsd2mqtt",
-  "version": "dev",
+  "version": "1.0.0",
   "slug": "apcupsd2mqtt",
   "description": "Home Assistant Add-on apcupsd2mqtt",
   "url": "https://github.com/demey/hassio-addons/tree/master/apcupsd2mqtt",
@@ -14,22 +14,22 @@
     "log_level": "info",
     "update_interval": 15,
     "mqtt": {
-	    "host": "127.0.0.1",
-	    "port": 1883,
-	    "username": "username",
-	    "password": "password",
-	    "topic": "homeassistant/"
-	  },
-	  "upses": [
-		  {
-		    "name": "apc_01",
-		    "url": "127.0.0.1:3551"
+	      "host": "127.0.0.1",
+	      "port": 1883,
+	      "username": "username",
+	      "password": "password",
+	      "topic": "homeassistant/"
 	    },
-      {
-		    "name": "apc_02",
-		    "url": "127.0.0.1:3551"
-	    }
-	]
+	    "upses": [
+	      {
+	        "name": "apc_01",
+		"url": "127.0.0.1:3551"
+	      },
+              {
+		"name": "apc_02",
+		"url": "127.0.0.1:3551"
+	      }
+	    ]
   },
   "schema": {
     "log_level": "list(trace|debug|info|notice|warning|error|fatal)",
@@ -43,8 +43,8 @@
 	  },
 	  "upses": [
 	    {
-		    "name": "str",
-		    "url": "str"
+		"name": "str",
+		"url": "str"
 	    }
 	  ]
   }
