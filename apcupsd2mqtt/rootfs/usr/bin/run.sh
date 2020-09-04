@@ -18,10 +18,9 @@ main() {
       logmessage=$(readarray -t array <<< $(apcaccess -h "$apchost"))
       if [ -n "$logmessage" ]
       then
-        echo "1"
         bashio::log.error "$logmessage"
       else
-        echo "2"
+        echo "${array[@]}"
         declare -A upsmap
         for i in "${array[@]}"
         do
