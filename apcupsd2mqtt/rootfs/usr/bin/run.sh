@@ -14,7 +14,7 @@ main() {
     do
       apchost=$(echo "$k" | jq -r '."url"')
       apcname=$(echo "$k" | jq -r '."name"')
-      echo "$apchost"
+
       logmessage=$(readarray -t array <<< $(apcaccess -h "$apchost"))
       if [ -n "$logmessage" ]
       then
