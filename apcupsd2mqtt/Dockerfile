@@ -9,7 +9,7 @@ COPY rootfs /
 RUN apk update
 RUN apk add --no-cache coreutils=8.32-r0
 RUN apk add --upgrade apcupsd
-RUN apk add --upgrade mosquitto
+RUN apk add --upgrade mosquitto-clients
 
 # Build arguments
 ARG BUILD_ARCH
