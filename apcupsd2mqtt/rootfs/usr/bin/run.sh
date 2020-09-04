@@ -14,7 +14,7 @@ main() {
     do
       apchost=$(echo "$k" | jq -r '."url"')
       apcname=$(echo "$k" | jq -r '."name"')
-
+      echo "$apchost"
       logmessage=$(readarray -t array <<< $(apcaccess -h "$apchost"))
       if [ -n "$logmessage" ]
       then
@@ -36,7 +36,8 @@ main() {
           | . as $a
           | reduce range(0; length/2) as $i 
             ({}; . + {($a[2*$i]): ($a[2*$i + 1]|fromjson? // .)})')
-
+        
+        echo "$message"
         mqtthost=$(echo "$(bashio::config 'mqtt')" | jq -r '."host"')
         mqttport=$(echo "$(bashio::config 'mqtt')" | jq -r '."port"')
         username=$(echo "$(bashio::config 'mqtt')" | jq -r '."username"')
@@ -45,6 +46,7 @@ main() {
         fulltopic="${topic}${apcname}/status"
 
         logmessage=$(mosquitto_pub -h "$mqtthost" -p "$mqttport" -u "$username" -P "$password" -t "$fulltopic" -m "$message")
+        echo "$logmessage"
         if [ -n "$logmessage" ]
         then
           prefix='Mqtt-client:'
