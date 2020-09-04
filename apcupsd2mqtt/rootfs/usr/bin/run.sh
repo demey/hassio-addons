@@ -14,13 +14,14 @@ main() {
     do
       apchost=$(echo "$k" | jq -r '."url"')
       apcname=$(echo "$k" | jq -r '."name"')
-      echo "$apchost"
+      
       logmessage=$(readarray -t array <<< $(apcaccess -h "$apchost"))
       if [ -n "$logmessage" ]
       then
+        echo "1"
         bashio::log.error "$logmessage"
       else
-        echo "${array[*]}"
+        echo "2"
         declare -A upsmap
         for i in "${array[@]}"
         do
