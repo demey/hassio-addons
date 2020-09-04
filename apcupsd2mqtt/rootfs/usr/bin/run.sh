@@ -20,6 +20,7 @@ main() {
       then
         bashio::log.error "$logmessage"
       else
+        echo "${array[*]}"
         declare -A upsmap
         for i in "${array[@]}"
         do
