@@ -8,7 +8,7 @@ main() {
   local sleep
   sleep=$(bashio::config 'update_interval')
 
-  while true; do
+#  while true; do
 
     for k in $(echo "$(bashio::config 'upses')")
     do
@@ -56,7 +56,7 @@ main() {
       fi
     done
       
-    sleep "${sleep}"
-  done
+#    sleep "${sleep}"
+#  done
 }
 main "$@"
