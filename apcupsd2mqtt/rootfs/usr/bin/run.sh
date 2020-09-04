@@ -45,11 +45,11 @@ main() {
         fulltopic="${topic}${apcname}/status"
 
         logmessage=$(mosquitto_pub -h "$mqtthost" -p "$mqttport" -u "$username" -P "$password" -t "$fulltopic" -m "$message")
-         if [ -n "$logmessage" ]
-         then
-           prefix='Mqtt-client:'
-           bashio::log.error "${prefix} ${logmessage}"
-         fi
+        if [ -n "$logmessage" ]
+        then
+          prefix='Mqtt-client:'
+          bashio::log.error "${prefix} ${logmessage}"
+        fi
       fi
     done
       
