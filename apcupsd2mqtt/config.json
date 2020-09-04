@@ -33,7 +33,7 @@
   },
   "schema": {
     "log_level": "list(trace|debug|info|notice|warning|error|fatal)",
-    "udpate_interval": "int(1,120)"
+    "udpate_interval": "int(1,120)",
     "mqtt": {
 	    "host": "str",
 	    "port": "int",
