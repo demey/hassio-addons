@@ -12,10 +12,40 @@
   "hassio_role": "default",
   "options": {
     "log_level": "info",
-    "seconds_between_quotes": 15
+    "udpate_interval": 15
+    "mqtt": {
+	    "host": "127.0.0.1",
+	    "port": 1883,
+	    "username": "username",
+	    "password": "password",
+	    "topic": "homeassistant/"
+	  },
+	  "upses": [
+		  {
+		    "name": "apc_01",
+		    "url": "127.0.0.1:3551"
+	    },
+      {
+		    "name": "apc_02",
+		    "url": "127.0.0.1:3551"
+	    }
+	]
   },
   "schema": {
     "log_level": "list(trace|debug|info|notice|warning|error|fatal)",
-    "seconds_between_quotes": "int(1,120)"
+    "udpate_interval": "int(1,120)"
+    "mqtt": {
+	    "host": "str",
+	    "port": "int",
+	    "username": "str",
+	    "password": "str",
+	    "topic": "str"
+	  },
+	  "upses": [
+	    {
+		    "name": "str",
+		    "url": "str"
+	    }
+	  ]
   }
 }
