@@ -20,13 +20,13 @@ ARG BUILD_VERSION
 # Labels
 LABEL \
     io.hass.name="apcupsd2mqtt" \
-    io.hass.description="Home Assistant Add-on apcupsd2mqtt" \
+    io.hass.description="Polling apcupsd services" \
     io.hass.arch="${BUILD_ARCH}" \
     io.hass.type="addon" \
     io.hass.version=${BUILD_VERSION} \
     maintainer="demey <demey@addons.community>" \
     org.opencontainers.image.title="apcupsd2mqtt" \
-    org.opencontainers.image.description="Home Assistant Add-on apcupsd2mqtt" \
+    org.opencontainers.image.description="Polling apcupsd services" \
     org.opencontainers.image.vendor="Home Assistant Add-on" \
     org.opencontainers.image.authors="demey <demey@addons.community>" \
     org.opencontainers.image.licenses="MIT" \
