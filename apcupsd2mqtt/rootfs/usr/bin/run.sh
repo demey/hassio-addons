@@ -103,7 +103,7 @@ main() {
 
     bashio::log.trace "${FUNCNAME[0]}"
 
-    sleep=$(bashio::config 'seconds_between_quotes')
+    sleep=$(bashio::config 'udpate_interval')
     bashio::log.info "Seconds between each quotes is set to: ${sleep}"
 
     while true; do
