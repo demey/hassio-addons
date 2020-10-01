@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "slug": "apcupsd2mqtt",
   "description": "Apcupsd to MQTT Brige",
+  "auto_uart": true,
   "url": "https://github.com/demey/hassio-addons/tree/master/apcupsd2mqtt",
   "startup": "application",
   "init": false,
