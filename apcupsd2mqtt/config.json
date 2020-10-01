@@ -13,6 +13,7 @@
   "options": {
     "log_level": "info",
     "update_interval": 30,
+    "local_connection": "false",
     "mqtt": {
 	      "host": "127.0.0.1",
 	      "port": 1883,
@@ -30,7 +31,6 @@
 	"url": "127.0.0.1:3551"
       }
     ],
-    "local_connection": false",
     "serial": {
       "port": "/dev/ttyACM0"
     }
