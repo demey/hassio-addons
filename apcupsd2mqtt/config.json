@@ -13,7 +13,7 @@
   "options": {
     "log_level": "info",
     "update_interval": 30,
-    "local_connection": "false",
+    "local_connection": false,
     "mqtt": {
 	      "host": "127.0.0.1",
 	      "port": 1883,
@@ -38,6 +38,7 @@
   "schema": {
     "log_level": "list(trace|debug|info|notice|warning|error|fatal)",
     "update_interval": "int(1,120)",
+    "local_connection": "bool",
     "mqtt": {
 	    "host": "str",
 	    "port": "int",
