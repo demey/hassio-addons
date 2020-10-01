@@ -10,11 +10,7 @@
   "boot": "auto",
   "hassio_api": true,
   "hassio_role": "default",
-  "map": [
-    "share:rw"
-  ],
   "options": {
-    "data_path": "/share/apcupsd2mqtt",
     "log_level": "info",
     "update_interval": 30,
     "mqtt": {
@@ -34,6 +30,7 @@
 	"url": "127.0.0.1:3551"
       }
     ],
+    "local_connection": false",
     "serial": {
       "port": "/dev/ttyACM0"
     }
