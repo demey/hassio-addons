@@ -20,19 +20,19 @@
 	      "password": "password",
 	      "topic": "homeassistant/"
 	    },
-	    "upses": [
-	      {
-	        "name": "apc_01",
-		"url": "127.0.0.1:3551"
-	      },
-              {
-		"name": "apc_02",
-		"url": "127.0.0.1:3551"
-	      }
-	    ]
-  },
-  "serial": {
-    "port": "/dev/ttyACM0"
+    "upses": [
+      {
+        "name": "apc_01",
+	"url": "127.0.0.1:3551"
+      },
+      {
+	"name": "apc_02",
+	"url": "127.0.0.1:3551"
+      }
+    ],
+    "serial": {
+      "port": "/dev/ttyACM0"
+    }
   },
   "schema": {
     "log_level": "list(trace|debug|info|notice|warning|error|fatal)",
