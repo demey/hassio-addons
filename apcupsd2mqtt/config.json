@@ -31,6 +31,9 @@
 	      }
 	    ]
   },
+  "serial": {
+    "port": "/dev/ttyACM0"
+  },
   "schema": {
     "log_level": "list(trace|debug|info|notice|warning|error|fatal)",
     "update_interval": "int(1,120)",
