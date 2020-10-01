@@ -10,7 +10,11 @@
   "boot": "auto",
   "hassio_api": true,
   "hassio_role": "default",
+  "map": [
+    "share:rw"
+  ],
   "options": {
+    "data_path": "/share/apcupsd2mqtt",
     "log_level": "info",
     "update_interval": 30,
     "mqtt": {
