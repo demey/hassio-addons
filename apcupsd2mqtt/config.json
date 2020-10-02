@@ -16,7 +16,7 @@
    "boot":"auto",
    "hassio_api":true,
    "hassio_role":"manager",
-   "devices": ["/dev/bus/usb/:/dev/usb/:rwm"],
+   "devices": ["/dev/bus/usb/:/dev/bus/usb/:rwm"],
    "options":{
       "log_level":"info",
       "update_interval":30,
