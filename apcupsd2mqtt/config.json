@@ -1,6 +1,6 @@
 {
    "name":"apcupsd2mqtt",
-   "version":"1.0.1",
+   "version":"1.0.1.1",
    "slug":"apcupsd2mqtt",
    "description":"Apcupsd to MQTT Brige",
    "url":"https://github.com/demey/hassio-addons/tree/master/apcupsd2mqtt",
