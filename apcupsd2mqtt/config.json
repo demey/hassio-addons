@@ -3,7 +3,6 @@
    "version":"1.0.1",
    "slug":"apcupsd2mqtt",
    "description":"Apcupsd to MQTT Brige",
-   "auto_uart": true,
    "url":"https://github.com/demey/hassio-addons/tree/master/apcupsd2mqtt",
    "startup":"application",
    "init":false,
@@ -16,7 +15,8 @@
    ],
    "boot":"auto",
    "hassio_api":true,
-   "hassio_role":"default",
+   "hassio_role":"manager",
+   "devices": ["/dev/usb/:/dev/usb/:rwm"],
    "options":{
       "log_level":"info",
       "update_interval":30,
