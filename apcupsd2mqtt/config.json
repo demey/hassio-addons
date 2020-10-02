@@ -14,7 +14,11 @@
   "options": {
     "log_level": "info",
     "update_interval": 30,
-    "local_connection": false,
+    "local_ups": false,
+    "upsname": "Backup UPS",
+    "onbatterydelay": 20,
+    "batterylevel": 30,
+    "minutes": 10,
     "mqtt": {
 	      "host": "127.0.0.1",
 	      "port": 1883,
@@ -22,7 +26,7 @@
 	      "password": "password",
 	      "topic": "homeassistant/"
 	    },
-    "upses": [
+    "network_upses": [
       {
         "name": "apc_01",
 	"url": "127.0.0.1:3551"
@@ -32,14 +36,15 @@
 	"url": "127.0.0.1:3551"
       }
     ],
-    "serial": {
-      "port": "/dev/ttyACM0"
-    }
   },
   "schema": {
     "log_level": "list(trace|debug|info|notice|warning|error|fatal)",
     "update_interval": "int(1,120)",
-    "local_connection": "bool",
+    "local_ups": "bool",
+    "upsname": "str",
+    "onbatterydelay": "int",
+    "batterylevel": "int",
+    "minutes": "int",
     "mqtt": {
 	    "host": "str",
 	    "port": "int",
@@ -52,9 +57,6 @@
         "name": "str",
         "url": "str"
       }
-    ],
-    "serial": {
-      "port": "str"
-    }
+    ]
   }
 }
