@@ -15,7 +15,7 @@ main() {
 
   while true; do
 
-    for k in $(echo "$(bashio::config 'upses')")
+    for k in $(echo "$(bashio::config 'network_upses')")
     do
       apchost=$(echo "$k" | jq -r '."url"')
       apcname=$(echo "$k" | jq -r '."name"')

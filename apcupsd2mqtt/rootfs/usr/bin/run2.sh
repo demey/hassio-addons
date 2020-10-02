@@ -23,7 +23,7 @@ if [[ "$LOCAL_UPS" = true ]] ; then
     sed -i "s/^MINUTES [0-9]\+/MINUTES $MINUTES/" $MAIN_CONFIG
     sed -i "s/^ANNOY [0-9]\+/ANNOY 0/" $MAIN_CONFIG
 #    exec /bin/rm -f /etc/apcupsd/powerfail
-    exec /sbin/apcupsd -b -f $MAIN_CONFIG
+#    exec /sbin/apcupsd -b -f $MAIN_CONFIG
   else
     echo "[Error] File $MAIN_CONFIG not found!"
   fi
