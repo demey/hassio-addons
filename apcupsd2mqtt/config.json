@@ -52,7 +52,7 @@
 	    "password": "str",
 	    "topic": "str"
     },
-    "upses": [
+    "network_upses": [
       {
         "name": "str",
         "url": "str"
