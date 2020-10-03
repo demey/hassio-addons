@@ -27,7 +27,7 @@ if [[ "$LOCAL_UPS" = true ]] ; then
     sed -i "s/^MINUTES [0-9]\+/MINUTES $MINUTES/" $UPS_CONFIG
     sed -i "s/^ANNOY [0-9]\+/ANNOY 0/" $UPS_CONFIG
     /bin/rm -f /etc/apcupsd/powerfail
-    /sbin/apcupsd -f $MAIN_CONFIG
+    /sbin/apcupsd -f $UPS_CONFIG
     bashio::log.info "Service apcupsd started"
   fi
 fi
