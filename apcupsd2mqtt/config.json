@@ -15,14 +15,13 @@
    ],
    "boot": "auto",
    "hassio_api": true,
-   "hassio_role": "manager",
+   "hassio_role": "default",
    "kernel_modules": true,
    "auto_uart": true,
    "udev": true,
    "gpio": true,
    "apparmor": false,
-   "privileged": ["SYS_MODULE", "SYS_RAWIO"],
-   "devices": ["/dev/bus/usb:/dev/bus/usb:rwm", "/dev/mem:/dev/mem:rw"],
+   "devices": ["/dev/usb/hiddev0:/dev/usb/hiddev0:rwm"],
    "options":{
       "log_level": "info",
       "update_interval": 30,
@@ -50,6 +49,7 @@
       ]
    },
    "schema":{
+      "device": "str?",
       "log_level": "list(trace|debug|info|notice|warning|error|fatal)",
       "update_interval": "int(1,120)",
       "local_ups": "bool",
