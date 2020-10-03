@@ -19,7 +19,7 @@ if [[ "$LOCAL_UPS" = true ]] ; then
     bashio::log.info "$MAIN_CONFIG found"
     sed -i "s/\#UPSNAME$/UPSNAME $UPSNAME/" $MAIN_CONFIG
     sed -i "s/^UPSCABLE [a-z]\+/UPSCABLE usb/" $MAIN_CONFIG
-    sed -i "s/^UPSTYPE [a-z]\+/UPSTYPE modbus/" $MAIN_CONFIG
+    sed -i "s/^UPSTYPE [a-z]\+/UPSTYPE usb/" $MAIN_CONFIG
     sed -i "s/^DEVICE .*\+/DEVICE/" $MAIN_CONFIG
     sed -i "s/^ONBATTERYDELAY [0-9]\+/ONBATTERYDELAY $ONBATTERYDELAY/" $MAIN_CONFIG
     sed -i "s/^BATTERYLEVEL [0-9]\+/BATTERYLEVEL $BATTERYLEVEL/" $MAIN_CONFIG
