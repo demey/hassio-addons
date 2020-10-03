@@ -16,7 +16,6 @@
    "boot":"auto",
    "hassio_api":true,
    "hassio_role":"manager",
-   "udev": true,
    "usb": true,
    "options":{
       "log_level":"info",
