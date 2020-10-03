@@ -19,7 +19,6 @@
     },
    "hassio_api": true,
    "hassio_role": "default",
-   "devices": ["/dev/usb/hiddev0:/dev/usb/hiddev0:rwm"],
    "options":{
       "log_level": "info",
       "update_interval": 30,
