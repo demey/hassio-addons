@@ -3,7 +3,7 @@
 # Start apcupsd service
 # ==============================================================================
 
-chmod 777 /dev/bus/usb/*/*
+#chmod 777 /dev/bus/usb/*/*
 
 bashio::log.info "Starting apcupsd"
 MAIN_CONFIG=/etc/apcupsd/apcupsd.conf
