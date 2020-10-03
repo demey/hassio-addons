@@ -22,7 +22,7 @@ main() {
       apchost=$(echo "$k" | jq -r '."url"')
       apcname=$(echo "$k" | jq -r '."name"')
       
-      readarray -t array <<< $(apcaccess -h "$apchost")
+      readarray -t array <<< $(apcaccess -h "$apchost") || bashio::log.error "Connection to $apchost filed"
 
       declare -A upsmap
       for i in "${array[@]}"
