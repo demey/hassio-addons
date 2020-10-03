@@ -1,4 +1,4 @@
-ARG BUILD_FROM=hassioaddons/base:8.0.1
+ARG BUILD_FROM=homeassistant/amd64-builder
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
