@@ -1,10 +1,10 @@
 {
-   "name":"apcupsd2mqtt",
-   "version":"1.0.1.1",
-   "slug":"apcupsd2mqtt",
+   "name": "apcupsd2mqtt",
+   "version": "1.0.1.1",
+   "slug": "apcupsd2mqtt",
    "description":"Apcupsd to MQTT Brige",
-   "url":"https://github.com/demey/hassio-addons/tree/master/apcupsd2mqtt",
-   "startup":"application",
+   "url": "https://github.com/demey/hassio-addons/tree/master/apcupsd2mqtt",
+   "startup": "application",
    "init":false,
    "arch":[
       "aarch64",
@@ -13,55 +13,61 @@
       "armv7",
       "i386"
    ],
-   "boot":"auto",
-   "hassio_api":true,
-   "hassio_role":"manager",
-   "usb": true,
+   "boot": "auto",
+   "hassio_api": true,
+   "hassio_role": "manager",
+   "kernel_modules": true,
+   "auto_uart": true,
+   "udev": true,
+   "gpio": true,
+   "apparmor": false,
+   "privileged": ["SYS_MODULE", "SYS_RAWIO"],
+   "devices": ["/dev/bus/usb:/dev/bus/usb:rwm", "/dev/mem:/dev/mem:rw"],
    "options":{
-      "log_level":"info",
-      "update_interval":30,
-      "local_ups":false,
-      "upsname":"BackupUPS",
-      "onbatterydelay":20,
-      "batterylevel":30,
-      "minutes":10,
+      "log_level": "info",
+      "update_interval": 30,
+      "local_ups": false,
+      "upsname": "BackupUPS",
+      "onbatterydelay": 20,
+      "batterylevel": 30,
+      "minutes": 10,
       "mqtt":{
-         "host":"127.0.0.1",
-         "port":1883,
-         "username":"username",
-         "password":"password",
-         "topic":"homeassistant/"
+         "host": "127.0.0.1",
+         "port": 1883,
+         "username": "username",
+         "password": "password",
+         "topic": "homeassistant/"
       },
       "network_upses":[
          {
-            "name":"apc_01",
-            "url":"127.0.0.1:3551"
+            "name": "apc_01",
+            "url": "127.0.0.1:3551"
          },
          {
-            "name":"apc_02",
-            "url":"127.0.0.1:3551"
+            "name": "apc_02",
+            "url": "127.0.0.1:3551"
          }
       ]
    },
    "schema":{
-      "log_level":"list(trace|debug|info|notice|warning|error|fatal)",
-      "update_interval":"int(1,120)",
-      "local_ups":"bool",
-      "upsname":"str",
-      "onbatterydelay":"int",
-      "batterylevel":"int",
-      "minutes":"int",
+      "log_level": "list(trace|debug|info|notice|warning|error|fatal)",
+      "update_interval": "int(1,120)",
+      "local_ups": "bool",
+      "upsname": "str",
+      "onbatterydelay": "int",
+      "batterylevel": "int",
+      "minutes": "int",
       "mqtt":{
-         "host":"str",
-         "port":"int",
-         "username":"str",
-         "password":"str",
-         "topic":"str"
+         "host": "str",
+         "port": "int",
+         "username": "str",
+         "password": "str",
+         "topic": "str"
       },
       "network_upses":[
          {
-            "name":"str",
-            "url":"str"
+            "name": "str",
+            "url": "str"
          }
       ]
    }
