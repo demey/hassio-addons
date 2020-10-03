@@ -22,7 +22,7 @@ if [[ "$LOCAL_UPS" = true ]] ; then
     sed -i "s/\#UPSNAME$/UPSNAME $UPSNAME/" $MAIN_CONFIG
     sed -i "s/^UPSCABLE [a-z]\+/UPSCABLE usb/" $MAIN_CONFIG
     sed -i "s/^UPSTYPE [a-z]\+/UPSTYPE usb/" $MAIN_CONFIG
-    sed -i "s/^DEVICE .*\+/DEVICE/" $MAIN_CONFIG
+    sed -i "s/^DEVICE .*\+/DEVICE BB0100009999/" $MAIN_CONFIG
     sed -i "s/^ONBATTERYDELAY [0-9]\+/ONBATTERYDELAY $ONBATTERYDELAY/" $MAIN_CONFIG
     sed -i "s/^BATTERYLEVEL [0-9]\+/BATTERYLEVEL $BATTERYLEVEL/" $MAIN_CONFIG
     sed -i "s/^MINUTES [0-9]\+/MINUTES $MINUTES/" $MAIN_CONFIG
