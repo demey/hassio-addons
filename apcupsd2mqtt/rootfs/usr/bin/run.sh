@@ -13,6 +13,8 @@ main() {
   password=$(echo "$(bashio::config 'mqtt')" | jq -r '."password"')
   topic=$(echo "$(bashio::config 'mqtt')" | jq -r '."topic"')
 
+  bashio::log.info "Service apcupsd2mqtt started"
+  
   while true; do
 
     for k in $(echo "$(bashio::config 'network_upses')")

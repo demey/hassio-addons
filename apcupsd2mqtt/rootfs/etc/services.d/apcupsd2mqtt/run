@@ -3,8 +3,32 @@
 # Home Assistant Add-on: apcupsd2mqtt
 # Runs apcupsd2mqtt script
 # ==============================================================================
+bashio::log.info "Starting apcupsd2mqtt"
 
+UPS_CONFIG=/etc/apcupsd/apcupsd.conf
+CONFIG_PATH=/data/options.json
+LOCAL_UPS=$(jq --raw-output ".local_ups" $CONFIG_PATH)
 
-bashio::log.info "Starting apcupsd2mqtt..."
+if [[ "$LOCAL_UPS" = true ]] ; then
+  bashio::log.info "Local UPS enabled"
 
+  UPSNAME=$(jq --raw-output ".upsname" $CONFIG_PATH)
+  ONBATTERYDELAY=$(jq --raw-output ".onbatterydelay" $CONFIG_PATH)
+  BATTERYLEVEL=$(jq --raw-output ".batterylevel" $CONFIG_PATH)
+  MINUTES=$(jq --raw-output ".minutes" $CONFIG_PATH)
+
+  if [[ -f "$UPS_CONFIG" ]]; then
+    sed -i "s/\#UPSNAME$/UPSNAME $UPSNAME/" $UPS_CONFIG
+    sed -i "s/^UPSCABLE [a-z]\+/UPSCABLE usb/" $UPS_CONFIG
+    sed -i "s/^UPSTYPE [a-z]\+/UPSTYPE usb/" $UPS_CONFIG
+    sed -i "s/^DEVICE .*\+/DEVICE/" $UPS_CONFIG
+    sed -i "s/^ONBATTERYDELAY [0-9]\+/ONBATTERYDELAY $ONBATTERYDELAY/" $UPS_CONFIG
+    sed -i "s/^BATTERYLEVEL [0-9]\+/BATTERYLEVEL $BATTERYLEVEL/" $UPS_CONFIG
+    sed -i "s/^MINUTES [0-9]\+/MINUTES $MINUTES/" $UPS_CONFIG
+    sed -i "s/^ANNOY [0-9]\+/ANNOY 0/" $UPS_CONFIG
+    /bin/rm -f /etc/apcupsd/powerfail
+    /sbin/apcupsd -f $MAIN_CONFIG
+    bashio::log.info "Service apcupsd started"
+  fi
+fi
 exec /usr/bin/run.sh
