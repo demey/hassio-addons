@@ -24,11 +24,8 @@ main() {
       fulltopic="${topic}${apcname}/status"
 
       readarray -t array <<< $(apcaccess -h "$apchost")
-      bashio::log.info "${array[0]}"
-      bashio::log.info "${array[1]}"
-      bashio::log.info "${array[2]}"
 
-      if [[ "${#array[@]}" -gt 10 ]]; then
+      if [[ "${#array[@]}" -gt 1 ]]; then
         declare -A upsmap
         for i in "${array[@]}"
         do
