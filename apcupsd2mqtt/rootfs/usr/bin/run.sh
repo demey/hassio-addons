@@ -26,7 +26,7 @@ main() {
       readarray -t array <<< $(apcaccess -h "$apchost")
       bashio::log.info "${array[0]}"
 
-      if [[ "${array[0]}" -ne *"Host is unreachable"* ]]; then
+      if [[ ! grep -q unreachable <<< "${array[0]}"  ]]; then
         declare -A upsmap
         for i in "${array[@]}"
         do
