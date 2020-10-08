@@ -26,7 +26,9 @@ main() {
       readarray -t array <<< $(apcaccess -h "$apchost")
       bashio::log.info "${array[0]}"
 
-      if [[ ! grep -q unreachable <<< "${array[0]}"  ]]; then
+      if [[ "${array[0]}" =~ "refused" ]]; then
+        message=$(echo "{\"STATUS\":\"OFFLINE\"}")
+      else  
         declare -A upsmap
         for i in "${array[@]}"
         do
@@ -43,9 +45,6 @@ main() {
           | . as $a
           | reduce range(0; length/2) as $i 
             ({}; . + {($a[2*$i]): ($a[2*$i + 1]|fromjson? // .)})')
-
-      else  
-        message=$(echo "{\"STATUS\":\"OFFLINE\"}")
       fi
       mosquitto_pub -h "$mqtthost" -p "$mqttport" -u "$username" -P "$password" -t "$fulltopic" -m "$message"
     done
