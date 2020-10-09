@@ -14,6 +14,9 @@ main() {
   topic=$(echo "$(bashio::config 'mqtt')" | jq -r '."topic"')
 
   bashio::log.info "Service apcupsd2mqtt started"
+
+  mqttstate="$(nmap -p "$mqttport" -oX - "$mqtthost" | xmllint --xpath '//port[@portid=\""$mqttport"\"]/state/@state' - | awk -F'[ :""]' '{print $3}')"
+  bashio::log.info "$mqttstate"
   
   while true; do
 
@@ -24,7 +27,6 @@ main() {
       fulltopic="${topic}${apcname}/status"
 
       readarray -t array <<< $(apcaccess -h "$apchost")
-      bashio::log.info "${array[0]}"
 
       if [[ "${array[0]}" =~ "refused" ]]; then
         message=$(echo "{\"STATUS\":\"OFFLINE\"}")
