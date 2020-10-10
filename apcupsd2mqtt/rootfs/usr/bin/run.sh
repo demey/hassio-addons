@@ -17,23 +17,27 @@ get_router_info() {
   username=$(echo "$(bashio::config 'router')" | jq -r '."username"')
   password=$(echo "$(bashio::config 'router')" | jq -r '."password"')
 
-  output=$((
-  sleep 2
-  echo "$cmd"
-  sleep 2
-  echo "exit"
-  ) | sshpass -p "$password" ssh -T -o StrictHostKeyChecking=no "$username"@"$host")
+  routerstate="$(nmap -n -p 22 $host | grep 22 | awk '{print $2}')"
+  if [[ "$routerstate" == "open" ]]; then
+    output=$((
+    sleep 2
+    echo "$cmd"
+    sleep 2
+    echo "exit"
+    ) | sshpass -p "$password" ssh -T -o StrictHostKeyChecking=no "$username"@"$host")
 
-  while read -r line; do
-  if grep -q 'rxspeed' <<< "$line"; then
-    rx=$(echo -e "${line#*: }")
+    while read -r line; do
+    if grep -q 'rxspeed' <<< "$line"; then
+      rx=$(echo -e "${line#*: }")
+    fi
+    if grep -q 'txspeed' <<< "$line"; then
+      tx=$(echo -e "${line#*: }")
+    fi
+    done <<< "$output"
+    echo -e "${rx}:${tx}"
+  else
+    echo -e "0:0"
   fi
-  if grep -q 'txspeed' <<< "$line"; then
-    tx=$(echo -e "${line#*: }")
-  fi
-  done <<< "$output"
-
-  echo -e "${rx}:${tx}"
 }
 
 main() {
@@ -58,7 +62,7 @@ main() {
   username=$(echo "$(bashio::config 'mqtt')" | jq -r '."username"')
   password=$(echo "$(bashio::config 'mqtt')" | jq -r '."password"')
   topic=$(echo "$(bashio::config 'mqtt')" | jq -r '."topic"')
-  routertopic=$(echo "$(bashio::config 'router')" | jq -r '."topic"')
+  topic2=$(echo "$(bashio::config 'router')" | jq -r '."mqtttopic"')
 
   bashio::log.info "Service apcupsd2mqtt started"
 
@@ -68,9 +72,9 @@ main() {
     if [[ "$mqttstate" == "open" ]]; then
       bashio::log.info "MQTT server port state: $mqttstate"
       router=$(get_router_info)
-      bashio::log.info "Keenetic: $router"
-      mosquitto_pub -h "$mqtthost" -p "$mqttport" -u "$username" -P "$password" -t "${routertopic}/rx" -m "${router%:*}"
-      mosquitto_pub -h "$mqtthost" -p "$mqttport" -u "$username" -P "$password" -t "${routertopic}/tx" -m "${router#*:}"
+      
+      mosquitto_pub -h "$mqtthost" -p "$mqttport" -u "$username" -P "$password" -t "${topic2}/rx" -m "${router%:*}"
+      mosquitto_pub -h "$mqtthost" -p "$mqttport" -u "$username" -P "$password" -t "${topic2}/tx" -m "${router#*:}"
 
       for k in $(echo "$(bashio::config 'network_upses')")
       do
