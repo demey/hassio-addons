@@ -6,11 +6,11 @@ FROM ${BUILD_FROM}
 COPY rootfs /
 
 # Setup base
-RUN apk update
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 RUN apk add --no-cache coreutils=8.32-r0
-RUN apk add --no-cache --upgrade mono
 RUN apk add --no-cache --upgrade apcupsd
 RUN apk add --no-cache --upgrade mosquitto-clients
+RUN apk add --no-cache --upgrade mono
 
 # Build arguments
 ARG BUILD_ARCH
