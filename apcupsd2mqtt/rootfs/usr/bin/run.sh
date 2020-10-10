@@ -15,8 +15,8 @@ main() {
 
   bashio::log.info "Service apcupsd2mqtt started"
 
-#  mqttstate="$(nmap -p "$mqttport" -oX - "$mqtthost" | xmllint --xpath '//port[@portid="1883"]/state/@state' - | awk -F'[ :""]' '{print $3}')"
-#  bashio::log.info "$mqttstate"
+  mqttstate="$(nmap -p "$mqttport" -oX - "$mqtthost" | xmllint --xpath '//port[@portid="1883"]/state/@state' - | awk -F'[ :""]' '{print $3}')"
+  bashio::log.info "MQTT server port state: $mqttstate"
   
   while true; do
 
@@ -30,6 +30,7 @@ main() {
 
       if [[ "${array[0]}" =~ "refused" ]]; then
         message=$(echo "{\"STATUS\":\"OFFLINE\"}")
+        bashio::log.info "APC host $apchost unavailable"
       else  
         declare -A upsmap
         for i in "${array[@]}"
