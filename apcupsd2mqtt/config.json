@@ -20,6 +20,12 @@
    "hassio_api": true,
    "hassio_role": "default",
    "options":{
+      "router":{
+         "host": "127.0.0.1",
+         "username": "username",
+         "password": "password",
+         "topic": "homeassistant/keenetic/"          
+      },
       "log_level": "info",
       "update_interval": 30,
       "local_ups": false,
@@ -47,6 +53,11 @@
    },
    "schema":{
       "device": "str?",
+      "router":{
+         "host": "str",
+         "username": "str",
+         "password": "str"          
+      },
       "log_level": "list(trace|debug|info|notice|warning|error|fatal)",
       "update_interval": "int(1,120)",
       "local_ups": "bool",
