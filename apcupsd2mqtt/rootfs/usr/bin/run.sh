@@ -15,7 +15,7 @@ main() {
 
   bashio::log.info "Service apcupsd2mqtt started"
 
-  mqttstate="$(nmap -p "$mqttport" -oX - "$mqtthost" | xmllint --xpath '//port[@portid="$mqttport"]/state/@state' - | awk -F'[ :""]' '{print $3}')"
+  mqttstate="$(nmap -p "$mqttport" -oX - "$mqtthost" | xmllint --xpath '//port[@portid="${mqttport}"]/state/@state' - | awk -F'[ :""]' '{print $3}')"
   bashio::log.info "MQTT server port state: $mqttstate"
   
   while true; do
