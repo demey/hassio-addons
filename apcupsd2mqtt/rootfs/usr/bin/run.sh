@@ -17,7 +17,7 @@ get_router_info() {
   username=$(echo "$(bashio::config 'router')" | jq -r '."username"')
   password=$(echo "$(bashio::config 'router')" | jq -r '."password"')
 
-  routerstate="$(nmap -n -p 22 $host | grep 22 | awk '{print $2}')"
+  routerstate="$(nmap -n -p 22 $host | grep '22/tcp' | awk '{print $2}')"
   if [[ "$routerstate" == "open" ]]; then
     output=$((
     sleep 2
