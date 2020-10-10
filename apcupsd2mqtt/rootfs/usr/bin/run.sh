@@ -73,8 +73,7 @@ main() {
       bashio::log.info "MQTT server port state: $mqttstate"
       router=$(get_router_info)
       
-      mosquitto_pub -h "$mqtthost" -p "$mqttport" -u "$username" -P "$password" -t "${topic2}/rx" -m "${router%:*}"
-      mosquitto_pub -h "$mqtthost" -p "$mqttport" -u "$username" -P "$password" -t "${topic2}/tx" -m "${router#*:}"
+      mosquitto_pub -h "$mqtthost" -p "$mqttport" -u "$username" -P "$password" -t "${topic2}/state" -m "{\"RX\":\"${router%:*}\",\"TX\":\"${router#*:}\"}"
 
       for k in $(echo "$(bashio::config 'network_upses')")
       do
