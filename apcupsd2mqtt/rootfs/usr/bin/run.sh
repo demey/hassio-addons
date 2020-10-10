@@ -66,8 +66,8 @@ main() {
   while true; do
     if [[ "$mqttstate" == "open" ]]; then
       bashio::log.info "MQTT server port state: $mqttstate"
-      router=$(get_router_info)
-      bashio::log.info "Keenetic: $router"
+#      router=$(get_router_info)
+#      bashio::log.info "Keenetic: $router"
 
       for k in $(echo "$(bashio::config 'network_upses')")
       do
