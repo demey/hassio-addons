@@ -1,4 +1,5 @@
-ARG BUILD_FROM=homeassistant/amd64-builder
+#ARG BUILD_FROM=homeassistant/amd64-builder
+ARG BUILD_FROM=hassioaddons/base:8.0.3
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -6,9 +7,9 @@ FROM ${BUILD_FROM}
 COPY rootfs /
 
 # Setup base
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 RUN apk --update upgrade \
-  && apk --no-cache add coreutils=8.32-r0 apcupsd mosquitto-clients mono
+  && apk --no-cache add coreutils=8.32-r0 apcupsd mosquitto-clients
+RUN apk add --no-cache mono --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing
 
 # Build arguments
 ARG BUILD_ARCH
