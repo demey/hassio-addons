@@ -59,7 +59,8 @@ main() {
         else
           bashio::log.info "Apcupsd service is not available on host: $apchost"
         fi
-        mosquitto_pub -h "$mqtthost" -p "$mqttport" -u "$username" -P "$password" -t "$fulltopic" -m "$message"
+        mqttresponse="$(mosquitto_pub -h "{$mqtthost}" -p "{$mqttport}" -u "{$username}" -P "{$password}" -t "{$fulltopic}" -m "{$message}")"
+        bashio::log.info "$mqttresponse"
       done
     else
       bashio::log.info "MQTT server port state: $mqttstate"
