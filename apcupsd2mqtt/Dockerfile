@@ -8,8 +8,7 @@ COPY rootfs /
 # Setup base
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 RUN apk --update upgrade \
-  && apk --no-cache add coreutils=8.32-r0 apcupsd mosquitto-clients
-#RUN apk add --no-cache --upgrade mono
+  && apk --no-cache add coreutils=8.32-r0 apcupsd mosquitto-clients mono
 
 # Build arguments
 ARG BUILD_ARCH
