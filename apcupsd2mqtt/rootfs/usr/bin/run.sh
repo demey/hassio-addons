@@ -27,9 +27,6 @@ main() {
         apcname=$(echo "$k" | jq -r '."name"')
         fulltopic="${topic}${apcname}/status"
 
-        echo "${apchost#*:}"
-        echo "${apchost%:*}"
-
         upsstate="$(nmap -n -p ${apchost#*:} ${apchost%:*} | grep ${apchost#*:} | awk '{print $2}')"
 
         if [[ "$upsstate" == "open" ]]; then
@@ -57,10 +54,9 @@ main() {
                 ({}; . + {($a[2*$i]): ($a[2*$i + 1]|fromjson? // .)})')
           fi
         else
-          bashio::log.info "Apcupsd service is not available on host: $apchost"
+          bashio::log.info "Apcupsd service is not available on $apchost"
         fi
-        mqttresponse="$(mosquitto_pub -h "{$mqtthost}" -p "{$mqttport}" -u "{$username}" -P "{$password}" -t "{$fulltopic}" -m "{$message}")"
-        bashio::log.info "$mqttresponse"
+        mosquitto_pub -h "$mqtthost" -p "$mqttport" -u "$username" -P "$password" -t "$fulltopic" -m "$message"
       done
     else
       bashio::log.info "MQTT server port state: $mqttstate"
