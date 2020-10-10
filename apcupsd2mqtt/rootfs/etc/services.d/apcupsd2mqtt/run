@@ -31,4 +31,5 @@ if [[ "$LOCAL_UPS" = true ]] ; then
     bashio::log.info "Service apcupsd started"
   fi
 fi
-exec /usr/bin/run.sh
+#exec /usr/bin/run.sh
+exec mono /usr/bin/any2mqtt.dll

@@ -7,7 +7,7 @@ COPY rootfs /
 
 # Setup base
 RUN apk update
-RUN apk add --no-cache coreutils=8.32-r0 nmap libxml2-utils
+RUN apk add --no-cache coreutils=8.32-r0 mono
 RUN apk add --upgrade apcupsd
 RUN apk add --upgrade mosquitto-clients
 
