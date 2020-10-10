@@ -13,7 +13,6 @@ get_router_info() {
   local tx
 
   cmd=$(echo "show interface ISP stat") 
-
   host=$(echo "$(bashio::config 'router')" | jq -r '."host"')
   username=$(echo "$(bashio::config 'router')" | jq -r '."username"')
   password=$(echo "$(bashio::config 'router')" | jq -r '."password"')
@@ -27,10 +26,10 @@ get_router_info() {
 
   while read -r line; do
   if grep -q 'rxspeed' <<< "$line"; then
-    rx=$(echo -e "$line")
+    rx=$(echo -e "${line#*: }")
   fi
   if grep -q 'txspeed' <<< "$line"; then
-    tx=$(echo -e "$line")
+    tx=$(echo -e "${line#*: }")
   fi
   done <<< "$output"
 
@@ -51,6 +50,7 @@ main() {
   local upsstate
   local message
   local router
+  local routertopic
 
   sleep=$(bashio::config 'update_interval')
   mqtthost=$(echo "$(bashio::config 'mqtt')" | jq -r '."host"')
@@ -58,6 +58,7 @@ main() {
   username=$(echo "$(bashio::config 'mqtt')" | jq -r '."username"')
   password=$(echo "$(bashio::config 'mqtt')" | jq -r '."password"')
   topic=$(echo "$(bashio::config 'mqtt')" | jq -r '."topic"')
+  routertopic=$(echo "$(bashio::config 'router')" | jq -r '."topic"')
 
   bashio::log.info "Service apcupsd2mqtt started"
 
@@ -66,8 +67,10 @@ main() {
   while true; do
     if [[ "$mqttstate" == "open" ]]; then
       bashio::log.info "MQTT server port state: $mqttstate"
-#      router=$(get_router_info)
-#      bashio::log.info "Keenetic: $router"
+      router=$(get_router_info)
+      bashio::log.info "Keenetic: $router"
+      mosquitto_pub -h "$mqtthost" -p "$mqttport" -u "$username" -P "$password" -t "${routertopic}/rx" -m "${router%:*}"
+      mosquitto_pub -h "$mqtthost" -p "$mqttport" -u "$username" -P "$password" -t "${routertopic}/tx" -m "${router#*:}"
 
       for k in $(echo "$(bashio::config 'network_upses')")
       do

@@ -8,7 +8,7 @@ COPY rootfs /
 
 # Setup base
 RUN apk --update upgrade \
-  && apk --no-cache add coreutils=8.32-r0 apcupsd mosquitto-clients nmap libxml2-utils sshpass
+  && apk --no-cache add coreutils=8.32-r0 apcupsd mosquitto-clients nmap libxml2-utils sshpass openssh
 
 # Build arguments
 ARG BUILD_ARCH
