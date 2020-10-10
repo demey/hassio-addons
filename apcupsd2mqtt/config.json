@@ -24,7 +24,7 @@
          "host": "127.0.0.1",
          "username": "username",
          "password": "password",
-         "mqtttopic": "homeassistant/keenetic/"          
+         "mqtttopic": "homeassistant/keenetic"          
       },
       "log_level": "info",
       "update_interval": 30,
