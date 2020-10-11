@@ -31,4 +31,4 @@ if [[ "$LOCAL_UPS" = true ]] ; then
     bashio::log.info "Service apcupsd started"
   fi
 fi
-exec /usr/bin/run.sh
+exec /usr/bin/run1.sh

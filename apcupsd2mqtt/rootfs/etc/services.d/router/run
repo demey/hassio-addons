@@ -1,0 +1,8 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# Home Assistant Add-on: apcupsd2mqtt
+# Runs apcupsd2mqtt script
+# ==============================================================================
+bashio::log.info "Starting router info"
+
+exec /usr/bin/run2.sh
