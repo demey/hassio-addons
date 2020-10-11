@@ -3,7 +3,7 @@
 # Home Assistant Add-on: apcupsd2mqtt
 # ==============================================================================
 
-main() {
+get_router_info() {
   local host
   local username
   local password
