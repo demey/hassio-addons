@@ -1,1 +1,2 @@
-/usr/bin/run.sh false root 0755 0755
+/usr/bin/run1.sh false root 0755 0755
+/usr/bin/run2.sh false root 0755 0755
