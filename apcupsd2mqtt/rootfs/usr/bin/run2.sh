@@ -57,12 +57,13 @@ main() {
 
   bashio::log.info "Service router info started"
 
-  mqttstate="$(nmap -n -p $mqttport $mqtthost | grep $mqttport | awk '{print $2}')"
-  
   while true; do
+    mqttstate="$(nmap -n -p $mqttport $mqtthost | grep $mqttport | awk '{print $2}')"
     if [[ "$mqttstate" == "open" ]]; then
       router=$(get_router_info)
       mosquitto_pub -h "$mqtthost" -p "$mqttport" -u "$username" -P "$password" -t "${topic2}/state" -m "{\"RX\":\"${router%:*}\",\"TX\":\"${router#*:}\"}"
+    else
+      bashio::log.info "MQTT server port state: $mqttstate"
     fi  
     sleep 10
   done

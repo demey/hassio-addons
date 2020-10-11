@@ -3,43 +3,6 @@
 # Home Assistant Add-on: apcupsd2mqtt
 # ==============================================================================
 
-get_router_info() {
-  local host
-  local username
-  local password
-  local topic
-  local cmd
-  local rx
-  local tx
-
-  cmd=$(echo "show interface ISP stat") 
-  host=$(echo "$(bashio::config 'router')" | jq -r '."host"')
-  username=$(echo "$(bashio::config 'router')" | jq -r '."username"')
-  password=$(echo "$(bashio::config 'router')" | jq -r '."password"')
-
-  routerstate="$(nmap -n -p 22 $host | grep '22/tcp' | awk '{print $2}')"
-  if [[ "$routerstate" == "open" ]]; then
-    output=$((
-    sleep 2
-    echo "$cmd"
-    sleep 2
-    echo "exit"
-    ) | sshpass -p "$password" ssh -T -o StrictHostKeyChecking=no "$username"@"$host")
-
-    while read -r line; do
-    if grep -q 'rxspeed' <<< "$line"; then
-      rx=$(echo -e "${line#*: }")
-    fi
-    if grep -q 'txspeed' <<< "$line"; then
-      tx=$(echo -e "${line#*: }")
-    fi
-    done <<< "$output"
-    echo -e "${rx}:${tx}"
-  else
-    echo -e "0:0"
-  fi
-}
-
 main() {
 
   local sleep
@@ -66,14 +29,9 @@ main() {
 
   bashio::log.info "Service apcupsd2mqtt started"
 
-  mqttstate="$(nmap -n -p $mqttport $mqtthost | grep $mqttport | awk '{print $2}')"
-  
   while true; do
+    mqttstate="$(nmap -n -p $mqttport $mqtthost | grep $mqttport | awk '{print $2}')"
     if [[ "$mqttstate" == "open" ]]; then
-      bashio::log.info "MQTT server port state: $mqttstate"
-      router=$(get_router_info)
-      
-      mosquitto_pub -h "$mqtthost" -p "$mqttport" -u "$username" -P "$password" -t "${topic2}/state" -m "{\"RX\":\"${router%:*}\",\"TX\":\"${router#*:}\"}"
 
       for k in $(echo "$(bashio::config 'network_upses')")
       do
@@ -112,8 +70,6 @@ main() {
         fi
         mosquitto_pub -h "$mqtthost" -p "$mqttport" -u "$username" -P "$password" -t "$fulltopic" -m "$message"
       done
-    else
-      bashio::log.info "MQTT server port state: $mqttstate"
     fi  
     sleep "${sleep}"
   done
