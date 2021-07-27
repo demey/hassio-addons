@@ -17,9 +17,9 @@ main() {
     if [ -f "$uploader" ]; then
       cd /share/ha2gd/
       result="$(python3 ${uploader})"
-      bashio::log.info "{$result}"
+      bashio::log.info "$result"
     else
-      bashio::log.warning "File ${uploader} does not exist"
+      bashio::log.warning "File $uploader does not exist"
     fi
     sleep "${sleep}"
   done
