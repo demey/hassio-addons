@@ -1,6 +1,6 @@
 {
    "name": "ha2gd",
-   "version": "1.0.2",
+   "version": "1.0.3",
    "slug": "ha2gd",
    "description": "Sync folders with Google Drive",
    "url": "https://github.com/demey/hassio-addons/apcupsd2mqtt",
