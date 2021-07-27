@@ -17,7 +17,6 @@ main() {
     while true; do
       result="$(python3 ${uploader})"
       bashio::log.info "{$result}"
-      sleep "${sleep}"
     done
   else
     bashio::log.warning "File ${uploader} does not exist"
