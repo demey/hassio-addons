@@ -9,18 +9,18 @@ main() {
   local result
   local uploader
   
-  uploader='/share/ha2gd/upload.py'
+  uploader="/share/ha2gd/upload.py"
   sleep=$(bashio::config 'sync_interval')
   bashio::log.info "Service ha2gd started"
   
   if [ -f "$uploader" ]; then
     while true; do
-      result='$(python3 $uploader)'
-      bashio::log.info '$result'
-      sleep '${sleep}'
+      result="$(python3 ${uploader})"
+      bashio::log.info "{$result}"
+      sleep "${sleep}"
     done
   else
-    bashio::log.error 'File $uploader does not exist'
+    bashio::log.error "File ${uploader} does not exist"
   fi
 }
 main "$@"
