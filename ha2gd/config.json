@@ -10,6 +10,7 @@
    "boot": "auto",
    "hassio_api": true,
    "hassio_role": "default",
+   "map": ["config", "share:rw"],
    "options": {
       "sync_interval": 60
    },
