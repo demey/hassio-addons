@@ -20,7 +20,7 @@ main() {
       sleep "${sleep}"
     done
   else
-    bashio::log.error "File ${uploader} does not exist"
+    bashio::log.warning "File ${uploader} does not exist"
   fi
 }
 main "$@"
