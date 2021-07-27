@@ -20,6 +20,8 @@ LABEL \
     org.opencontainers.image.description="Sync folders with Google Drive" \
     org.opencontainers.image.vendor="Home Assistant Add-on" \
     org.opencontainers.image.authors="demey <demey@addons.community>" \
+    org.opencontainers.image.source="https://github.com/demey/hassio-addons/ha2gd" \
+    org.opencontainers.image.documentation="https://github.com/demey/hassio-addons/blob/master/README.md" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.url="https://addons.community" \
     org.opencontainers.image.created=${BUILD_DATE} \
