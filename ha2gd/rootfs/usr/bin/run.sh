@@ -18,7 +18,7 @@ main() {
       cd /share/ha2gd/
       result="$(python3 ${uploader})"
       len=${#result}
-      if [ "$len" -gt 0 ]
+      if [ "$len" -gt 0 ]; then
         bashio::log.info "$result"
       fi
     else
