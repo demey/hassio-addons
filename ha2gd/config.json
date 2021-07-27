@@ -12,7 +12,7 @@
    "hassio_role": "default",
    "map": ["config", "share:rw"],
    "options": {
-      "sync_interval": 60
+      "sync_interval": 300
    },
    "schema": {
       "sync_interval": "int(1,120)"
