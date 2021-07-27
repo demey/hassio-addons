@@ -1,0 +1,20 @@
+{
+   "name": "ha2gd",
+   "version": "1.0.1",
+   "slug": "ha2gd",
+   "description": "Sync folders with Google Drive",
+   "url": "https://github.com/demey/hassio-addons/apcupsd2mqtt",
+   "startup": "application",
+   "init": false,
+   "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
+   "boot": "auto",
+   "hassio_api": true,
+   "hassio_role": "default",
+   "map": ["config", "share:rw"],
+   "options": {
+      "sync_interval": 60
+   },
+   "schema": {
+      "sync_interval": "int(1,120)"
+   }
+}
