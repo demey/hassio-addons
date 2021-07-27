@@ -3,7 +3,7 @@ FROM ${BUILD_FROM}
 COPY rootfs /
 RUN apk add --no-cache python3 py3-pip
 RUN pip3 install pydrive
-RUN chmod +x /share/ha2gd/*.py
+
 ARG BUILD_ARCH
 ARG BUILD_DATE
 ARG BUILD_REF
