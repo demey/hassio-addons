@@ -13,14 +13,15 @@ main() {
   sleep=$(bashio::config 'sync_interval')
   bashio::log.info "Service ha2gd started"
   
-  if [ -f "$uploader" ]; then
-    while true; do
+  while true; do
+    if [ -f "$uploader" ]; then
       cd /share/ha2gd/
       result="$(python3 ${uploader})"
       bashio::log.info "{$result}"
-    done
-  else
-    bashio::log.warning "File ${uploader} does not exist"
-  fi
+    else
+      bashio::log.warning "File ${uploader} does not exist"
+    fi
+    sleep "${sleep}"
+  done
 }
 main "$@"
