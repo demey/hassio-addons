@@ -15,6 +15,7 @@ main() {
   
   if [ -f "$uploader" ]; then
     while true; do
+      cd /share/ha2gd/
       result="$(python3 ${uploader})"
       bashio::log.info "{$result}"
     done
