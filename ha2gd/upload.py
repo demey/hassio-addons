@@ -3,6 +3,8 @@ from pydrive.drive import GoogleDrive
 from pydrive.auth import GoogleAuth
 from datetime import datetime
 
+workdir = "C:/Temp/ha2gd/"
+
 def upload(path, folder_id):
 
 	""" Initial Authentication, local """
@@ -36,16 +38,16 @@ def upload_handler(gauth, os_root_path, gdrive_root_folder_id):
 				file_path = os.path.join(dirpath, file)
 				new_file.SetContentFile(file_path) # Set content of the file from given string.
 				new_file.Upload()
-				with open('/share/ha2gd/update_log.txt', 'a') as update_log:
-					update_log.write( '\n' + 'Uploaded file to GD: %s %s' % (file, str(datetime.now())))
-				#print('Uploaded file to GD: %s' % (file))
+				#with open(workdir + 'update_log.txt', 'a') as update_log:
+				#	update_log.write( '\n' + 'Uploaded file to GD: %s %s' % (file, str(datetime.now())))
+				print('Uploaded file to GD: %s' % (file))
 	for item in item_list:
 		if item['title'] not in files:
 			delete_item = drive.CreateFile({'id': item['id']})
 			delete_item.Delete()
-			with open('/share/ha2gd/update_log.txt', 'a') as update_log:
-				update_log.write( '\n' + 'Deleted file on GD: %s %s' % (item['title'], str(datetime.now())))
-			#print('Deleted file on GD: %s' % (item['title']))
+			#with open((workdir + 'update_log.txt', 'a') as update_log:
+			#	update_log.write( '\n' + 'Deleted file on GD: %s %s' % (item['title'], str(datetime.now())))
+			print('Deleted file on GD: %s' % (item['title']))
 
 """ If you decide to hard code the Google Drive folder ID and Directory Path into the upload function 
 	you dont have to read the folder_sync_registrer below. You can just remove the code and uncomment
@@ -53,13 +55,7 @@ def upload_handler(gauth, os_root_path, gdrive_root_folder_id):
 """
 
 import csv
-with open('/share/ha2gd/folder_sync_registrer.txt', 'r') as f:
+with open(workdir + 'folder_sync_registrer.txt', 'r') as f:
     reader = csv.reader(f, delimiter=',')
     for row in reader:
     	upload(row[0], row[1])
-    	
-
-
-
-	
-
