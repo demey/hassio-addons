@@ -1,6 +1,6 @@
 {
    "name":"mbusreader",
-   "version":"0.0.10",
+   "version":"0.0.11",
    "slug":"mbusreader",
    "description":"Reading data from USB to MBus Master Module",
    "url":"https://github.com/demey/hassio-addons/tree/master/mbusreader",
