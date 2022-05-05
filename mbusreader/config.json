@@ -1,0 +1,41 @@
+{
+   "name": "mbusreader",
+   "version": "0.0.1",
+   "slug": "mbusreader",
+   "description":"Reading data from USB to MBus Master Module",
+   "url": "https://github.com/demey/hassio-addons/tree/master/mbusreader",
+   "startup": "application",
+   "init":false,
+   "arch":[
+      "aarch64",
+      "amd64",
+      "armhf",
+      "armv7",
+      "i386"
+   ],
+   "boot": "auto",
+   "hassio_api": true,
+   "hassio_role": "default",
+   "options":{
+      "log_level": "debug",
+      "update_interval": 300,
+      "mqtt":{
+         "host": "127.0.0.1",
+         "port": 1883,
+         "username": "username",
+         "password": "password",
+         "topic": "homeassistant/"
+      },
+   },
+   "schema":{
+      "log_level": "list(trace|debug|info|notice|warning|error|fatal)",
+      "update_interval": "int(1,3600)",
+      "mqtt":{
+         "host": "str",
+         "port": "int",
+         "username": "str",
+         "password": "str",
+         "topic": "str"
+      }
+   }
+}
