@@ -24,7 +24,7 @@
    },
    "schema":{
       "log_level":"list(trace|debug|info|notice|warning|error|fatal)",
-      "update_interval":"int(1,3600)",
+      "update_interval":"int(1,86400)",
       "mqtt":{
          "host":"str",
          "port":"int",
