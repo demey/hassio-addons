@@ -10,7 +10,7 @@ COPY rootfs /
 RUN apk --update upgrade \
   && apk --no-cache add coreutils mosquitto-clients libxml2-utils git autoconf automake libtool build-base python3
 RUN cd /tmp && git clone https://github.com/rscada/libmbus.git
-RUN ./setup.sh
+RUN ls > 1.txt
 
 # Build arguments
 ARG BUILD_ARCH
