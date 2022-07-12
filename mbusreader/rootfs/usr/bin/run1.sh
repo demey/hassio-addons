@@ -5,7 +5,7 @@
 
 bashio::log.info "Service mbusreader started"
 
-if [ -d "/share/mbusreader" ]; then
+if [ ! -d "/share/mbusreader" ]; then
   mkdir /share/mbusreader
 fi
 
