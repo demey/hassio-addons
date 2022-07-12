@@ -16,7 +16,7 @@
    "map": ["share:rw"],
    "options": {
       "log_level": "debug",
-      "update_interval": 300,
+      "update_interval": 900,
       "mqtt": {
          "host": "127.0.0.1",
          "port": 1883,
@@ -27,7 +27,7 @@
    },
    "schema": {
       "log_level": "list(trace|debug|info|notice|warning|error|fatal)",
-      "update_interval": "int(1,86400)",
+      "update_interval": "int(900,86400)",
       "mqtt": {
          "host": "str",
          "port": "int",
