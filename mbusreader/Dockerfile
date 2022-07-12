@@ -31,7 +31,7 @@ LABEL \
     org.opencontainers.image.authors="demey <demey@addons.community>" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.url="https://addons.community" \
-    org.opencontainers.image.source="https://github.com/demey/hassio-addons/mbusreader" \
+    org.opencontainers.image.source="https://github.com/demey/hassio-addons/tree/master/mbusreader" \
     org.opencontainers.image.documentation="https://github.com/demey/hassio-addons/blob/master/README.md" \
     org.opencontainers.image.created=${BUILD_DATE} \
     org.opencontainers.image.revision=${BUILD_REF} \
