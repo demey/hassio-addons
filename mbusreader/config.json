@@ -1,9 +1,9 @@
 {
-   "name":"mbusreader",
-   "version":"0.0.13",
-   "slug":"mbusreader",
-   "description":"Reading data from USB to MBus Master Module",
-   "url":"https://github.com/demey/hassio-addons/tree/master/mbusreader",
+   "name": "mbusreader",
+   "version": "0.0.13",
+   "slug": "mbusreader",
+   "description": "Reading data from USB to MBus Master Module",
+   "url": "https://github.com/demey/hassio-addons/tree/master/mbusreader",
    "startup": "application",
    "init": false,
    "uart": true,
@@ -14,26 +14,26 @@
    "hassio_api": false,
    "hassio_role": "manager",
    "map": ["share:rw"],
-   "options":{
-      "log_level":"debug",
-      "update_interval":300,
-      "mqtt":{
-         "host":"127.0.0.1",
-         "port":1883,
-         "username":"username",
-         "password":"password",
-         "topic":"mbusmeters/"
+   "options": {
+      "log_level": "debug",
+      "update_interval": 300,
+      "mqtt": {
+         "host": "127.0.0.1",
+         "port": 1883,
+         "username": "username",
+         "password": "password",
+         "topic": "mbusmeters/"
       }
    },
-   "schema":{
-      "log_level":"list(trace|debug|info|notice|warning|error|fatal)",
-      "update_interval":"int(1,86400)",
-      "mqtt":{
-         "host":"str",
-         "port":"int",
-         "username":"str",
-         "password":"str",
-         "topic":"str"
+   "schema": {
+      "log_level": "list(trace|debug|info|notice|warning|error|fatal)",
+      "update_interval": "int(1,86400)",
+      "mqtt": {
+         "host": "str",
+         "port": "int",
+         "username": "str",
+         "password": "str",
+         "topic": "str"
       }
    }
 }
