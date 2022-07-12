@@ -5,14 +5,13 @@
 
 bashio::log.info "Service mbusreader started"
 
-if [ ! -d "/share/mbusreader" ]; then
-  mkdir /share/mbusreader
-fi
+mkdir -p /share/mbusreader
+sleep=$(bashio::config 'update_interval')
 
 main() {
 
   while true; do
-    sleep 60
+    sleep "${sleep}"
   done
 }
 main "$@"
