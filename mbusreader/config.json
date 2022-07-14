@@ -24,7 +24,7 @@
          "port": 1883,
          "username": "username",
          "password": "password",
-         "topic": "mbusmeters/"
+         "topic": "mbusmeters"
       }
    },
    "schema": {
