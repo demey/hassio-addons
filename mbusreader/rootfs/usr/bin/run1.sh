@@ -6,32 +6,32 @@
 bashio::log.info "Service mbusreader started"
 
 mkdir -p /share/mbusreader
-ADDRESS_FILE=/share/mbusreader/addresses.txt
+#ADDRESS_FILE=/share/mbusreader/addresses.txt
 
 SLEEP=$(bashio::config 'update_interval')
-BAUDRATE=$(bashio::config 'baudrate')
-DEVICE=$(bashio::config 'device')
-MQTT_HOST=$(echo "$(bashio::config 'mqtt')" | jq -r '."host"')
-MQTT_PORT=$(echo "$(bashio::config 'mqtt')" | jq -r '."port"')
-MQTT_USER=$(echo "$(bashio::config 'mqtt')" | jq -r '."username"')
-MQTT_PASS=$(echo "$(bashio::config 'mqtt')" | jq -r '."password"')
-MQTT_TOPIC=$(echo "$(bashio::config 'mqtt')" | jq -r '."topic"')
+#BAUDRATE=$(bashio::config 'baudrate')
+#DEVICE=$(bashio::config 'device')
+#MQTT_HOST=$(echo "$(bashio::config 'mqtt')" | jq -r '."host"')
+#MQTT_PORT=$(echo "$(bashio::config 'mqtt')" | jq -r '."port"')
+#MQTT_USER=$(echo "$(bashio::config 'mqtt')" | jq -r '."username"')
+#MQTT_PASS=$(echo "$(bashio::config 'mqtt')" | jq -r '."password"')
+#MQTT_TOPIC=$(echo "$(bashio::config 'mqtt')" | jq -r '."topic"')
 
-if [ ! -f $ADDRESS_FILE ]; then
-    mbus-serial-scan-secondary -b $BAUDRATE $DEVICE | sed -e 's/^.*y address \([0-9A-Fa-f]\+\) .*$/\1/' > $ADDRESS_FILE
-fi
+#if [ ! -f $ADDRESS_FILE ]; then
+#    mbus-serial-scan-secondary -b $BAUDRATE $DEVICE | sed -e 's/^.*y address \([0-9A-Fa-f]\+\) .*$/\1/' > $ADDRESS_FILE
+#fi
 
 main() {
 
   while true; do
-    while read mbusmeters; do
-      bashio::log.info "Getting data from $mbusmeters"
-      # The sed is for replacing the @ with _ to be able to match on it in HASS templates
-      METER_DATA=$(mbus-serial-request-data-multi-reply -b $BAUDRATE $DEVICE $mbusmeters | xq . | sed -e "s/@/_/)
-      mosquitto_pub -h $MQTT_HOST -p $MQTT_PORT -u $MQTT_USER -P $MQTT_PASS -t $MQTT_TOPIC/$mbusmeters -m "${METER_DATA}"
-      BYTCNT=$(echo "$METER_DATA" | wc -c)
-      bashio::log.info "$BYTCNT bytes sent"
-    done < <(cat $ADDRESS_FILE)
+#    while read mbusmeters; do
+#      bashio::log.info "Getting data from $mbusmeters"
+#      # The sed is for replacing the @ with _ to be able to match on it in HASS templates
+#      METER_DATA=$(mbus-serial-request-data-multi-reply -b $BAUDRATE $DEVICE $mbusmeters | xq . | sed -e "s/@/_/)
+#      mosquitto_pub -h $MQTT_HOST -p $MQTT_PORT -u $MQTT_USER -P $MQTT_PASS -t $MQTT_TOPIC/$mbusmeters -m "${METER_DATA}"
+#      BYTCNT=$(echo "$METER_DATA" | wc -c)
+#      bashio::log.info "$BYTCNT bytes sent"
+#    done < <(cat $ADDRESS_FILE)
     sleep "${SLEEP}"
   done
 }
