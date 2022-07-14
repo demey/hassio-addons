@@ -1,6 +1,6 @@
 {
    "name": "mbusreader",
-   "version": "0.0.17",
+   "version": "0.0.18",
    "slug": "mbusreader",
    "description": "Reading data from USB to MBus Master Module",
    "url": "https://github.com/demey/hassio-addons/tree/master/mbusreader",
@@ -17,8 +17,6 @@
    "options": {
       "log_level": "debug",
       "update_interval": 900,
-      "device": "/dev/ttyUSB0",
-      "baudrate": 2400,
       "mqtt": {
          "host": "127.0.0.1",
          "port": 1883,
@@ -30,8 +28,6 @@
    "schema": {
       "log_level": "list(trace|debug|info|notice|warning|error|fatal)",
       "update_interval": "int(900,86400)",
-      "device": "str",
-      "baudrate": "int(2400,3600,4800,7200,9600)",
       "mqtt": {
          "host": "str",
          "port": "int",
