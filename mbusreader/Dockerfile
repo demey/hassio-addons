@@ -7,11 +7,19 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 COPY rootfs /
 
 # Setup base
-#RUN apk --update upgrade && apk --no-cache add coreutils mosquitto-clients libxml2-utils git autoconf automake libtool build-base python3 py3-pip py-lxml
-#RUN pip install xq yq
-#RUN cd /tmp && git clone https://github.com/rscada/libmbus.git
-#RUN chmod u+x /tmp/libmbus/build.sh && cd /tmp/libmbus && ./build.sh && ./configure && make -j4 && make install
-#RUN cd /tmp && rm -rf /tmp/libmbus
+RUN apk --update upgrade && \
+    apk --no-cache add coreutils mosquitto-clients libxml2-utils git python3 py3-pip py-lxml && \
+    pip install xq yq && \
+    cd /tmp && git clone https://github.com/rscada/libmbus.git
+RUN apk add --no-cache --virtual .build-deps autoconf automake libtool build-base && \
+    chmod u+x /tmp/libmbus/build.sh && \
+    cd /tmp/libmbus && \
+    ./build.sh && \
+    ./configure && \
+    make -j4 && \
+    make install && \
+    apk del .build-deps    
+RUN cd /tmp && rm -rf /tmp/libmbus
 
 # Build arguments
 ARG BUILD_ARCH
