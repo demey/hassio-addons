@@ -1,7 +1,7 @@
-#ARG BUILD_FROM=homeassistant/amd64-builder
-ARG BUILD_FROM=hassioaddons/base
-
+ARG BUILD_FROM
 FROM ${BUILD_FROM}
+
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Copy root filesystem
 COPY rootfs /
