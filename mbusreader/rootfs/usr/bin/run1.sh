@@ -10,7 +10,7 @@ ADDRESS_FILE=/share/mbusreader/addresses.txt
 LOG_FILE=/share/mbusreader/log.txt
 
 if [ -f $LOG_FILE ]; then
-    rm -f $LOG_FILE
+    mv -f $LOG_FILE "${LOG_FILE}.1"
 fi 
 
 SLEEP=$(bashio::config 'update_interval')
