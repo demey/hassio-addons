@@ -6,8 +6,8 @@ from datetime import datetime
 from signal import signal, SIGPIPE, SIG_DFL 
 
 signal(SIGPIPE,SIG_DFL) 
-g_history_days = 9
-l_history_days = 3
+g_history_days = 9 #day for keeping history on Google Drive
+l_history_days = 3 #day for keeping history localy
 workdir = "/share/ha2gd/"
 os_root = "/config/media/camera/"
 gdrive_root_id = "" #fill it by own value
