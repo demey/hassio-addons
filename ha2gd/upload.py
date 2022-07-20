@@ -30,7 +30,8 @@ def upload_handler(gauth, os_root_path, gdrive_root_folder_id):
       update_log.write( '\n' + 'Deleted gdrive folder: %s %s' % (oldest_folder, str(datetime.now())))
     g_folders.pop(oldest_folder, None)
 
-  l_folders = os.listdir(os_root_path)
+#  l_folders = os.listdir(os_root_path)
+  l_folders = [d for d in os.listdir(os_root_path) if os.path.isdir(d)]
 
   if len(l_folders) > l_history_days:
     shutil.rmtree(os_root_path + min(l_folders))
