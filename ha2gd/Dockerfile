@@ -1,4 +1,4 @@
-ARG BUILD_FROM=hassioaddons/base
+ARG BUILD_FROM
 FROM ${BUILD_FROM}
 COPY rootfs /
 RUN apk add --no-cache python3 py3-pip
