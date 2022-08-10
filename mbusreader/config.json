@@ -1,6 +1,6 @@
 {
    "name": "mbusreader",
-   "version": "2022.07.17",
+   "version": "2022.08.10",
    "slug": "mbusreader",
    "description": "Reading data from USB to MBus Master Module",
    "url": "https://github.com/demey/hassio-addons/tree/master/mbusreader",
@@ -13,6 +13,7 @@
    "boot": "auto",
    "hassio_api": true,
    "hassio_role": "manager",
+   "homeassistant_api": true,
    "map": ["share:rw"],
    "options": {
       "log_level": "debug",
