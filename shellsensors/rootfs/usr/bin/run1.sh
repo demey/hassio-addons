@@ -21,6 +21,7 @@ main() {
     MIN=$(date +"%M")
     NOW=$(date +"%s")
     DIFF=$(($NOW-$UPTIME))
+    echo $DIFF >> $LOG_FILE
     UVI_TIME=("00" "20" "40")
 
     if [[ "${UVI_TIME[*]}" =~ "${MIN}" && $DIFF -lt 29 ]]; then 
@@ -50,13 +51,10 @@ main() {
 }
 
 send_sensor_data() {
-  curl -X POST -H "Authorization: Bearer ${SUPERVISOR_TOKEN}" \
-     -s \
-     -o /dev/null \
-     -H "Content-Type: application/json" \
-     -d "$SENSOR_DATA" \
-     -w "[$(date)][INFO] Sensor update response code: %{http_code}\n" \
-     http://supervisor/core/api/states/${SENSOR_NAME}
+
+  RESPONSE=$(curl -X POST -H "Authorization: Bearer ${SUPERVISOR_TOKEN}" -s -o /dev/null -H "Content-Type: application/json" d "$SENSOR_DATA" -w "[$(date)][INFO] $SENSOR_NAME update response code: %{http_code}\n" http://supervisor/core/api/states/${SENSOR_NAME})
+  echo $RESPONSE >> $LOG_FILE
+
 }
 
 main "$@"
