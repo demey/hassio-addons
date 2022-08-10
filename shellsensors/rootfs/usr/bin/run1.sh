@@ -58,7 +58,7 @@ send_sensor_data() {
           -H "Content-Type: application/json" 
           -d "$SENSOR_DATA" \
           -w "[$(date)][INFO] $SENSOR_NAME update response code: %{http_code}\n" \
-          http://supervisor/core/api/states/${SENSOR_NAME})
+          http://supervisor/core/api/states/${SENSOR_NAME}
 
 }
 
