@@ -7,11 +7,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 COPY rootfs /
 
 # Setup base
-#RUN apk --update upgrade && \
-#    apk --no-cache add coreutils mosquitto-clients libxml2-utils git python3 py3-pip py-lxml && \
-#    pip install xq yq && \
-#    cd /tmp && git clone https://github.com/rscada/libmbus.git
-#RUN apk add --no-cache --virtual .build-deps autoconf automake libtool build-base && \
+RUN apk --update upgrade && \
+    apk --no-cache gcc make perl perl-dev libcrypt-ssleay-perl perl-crypt-ssleay
+#RUN apk add --no-cache --virtual .build-deps gcc make && \
 #    chmod u+x /tmp/libmbus/build.sh && \
 #    cd /tmp/libmbus && \
 #    ./build.sh && \
@@ -20,6 +18,7 @@ COPY rootfs /
 #    make install && \
 #    apk del .build-deps    
 #RUN cd /tmp && rm -rf /tmp/libmbus
+#RUN perl -MCPAN -e 'install JSON::Parse'
 
 # Build arguments
 ARG BUILD_ARCH
