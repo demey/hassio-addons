@@ -8,7 +8,7 @@ COPY rootfs /
 
 # Setup base
 RUN apk --update upgrade && \
-    apk --no-cache gcc make perl perl-dev libcrypt-ssleay-perl perl-crypt-ssleay
+    apk --no-cache add gcc make perl perl-dev libcrypt-ssleay-perl perl-crypt-ssleay
 #RUN apk add --no-cache --virtual .build-deps gcc make && \
 #    chmod u+x /tmp/libmbus/build.sh && \
 #    cd /tmp/libmbus && \
