@@ -8,17 +8,11 @@ COPY rootfs /
 
 # Setup base
 RUN apk --update upgrade && \
-    apk --no-cache add gcc make perl perl-dev perl-net-ssleay perl-crypt-ssleay
-#RUN apk add --no-cache --virtual .build-deps gcc make && \
-#    chmod u+x /tmp/libmbus/build.sh && \
-#    cd /tmp/libmbus && \
-#    ./build.sh && \
-#    ./configure && \
-#    make -j4 && \
-#    make install && \
-#    apk del .build-deps    
-#RUN cd /tmp && rm -rf /tmp/libmbus
-#RUN perl -MCPAN -e 'install JSON::Parse'
+    apk --no-cache add perl perl-net-ssleay perl-crypt-ssleay perl-lwp-useragent-determined perl-lwp-protocol-https
+
+RUN apk add --no-cache --virtual .build-deps gcc make build-base perl-dev && \
+    echo 'yes' | perl -MCPAN -e 'install (JSON::Parse)' && \
+    apk del .build-deps    
 
 # Build arguments
 ARG BUILD_ARCH
