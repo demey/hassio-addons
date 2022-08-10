@@ -8,7 +8,7 @@ COPY rootfs /
 
 # Setup base
 RUN apk --update upgrade && \
-    apk --no-cache add perl perl-net-ssleay perl-crypt-ssleay perl-lwp-useragent-determined perl-lwp-protocol-https
+    apk --no-cache add curl perl perl-net-ssleay perl-crypt-ssleay perl-lwp-useragent-determined perl-lwp-protocol-https perl-file-slurp
 
 RUN apk add --no-cache --virtual .build-deps gcc make build-base perl-dev && \
     echo 'yes' | perl -MCPAN -e 'install (JSON::Parse)' && \

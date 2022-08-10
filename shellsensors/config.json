@@ -1,6 +1,6 @@
 {
    "name": "shellsensors",
-   "version": "0.0.3",
+   "version": "0.0.4",
    "slug": "shellsensors",
    "description": "Adding different types of shell sensors to HA",
    "url": "https://github.com/demey/hassio-addons/tree/master/shellsensors",
@@ -16,7 +16,7 @@
    "homeassistant_api": true,
    "map": ["share:rw"],
    "options": {
-      "update_interval": 30
+      "update_interval": 180
    },
    "schema": {
       "update_interval": "int(10,86400)"
