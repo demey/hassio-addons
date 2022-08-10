@@ -24,7 +24,7 @@ main() {
     echo $DIFF >> $LOG_FILE
     UVI_TIME=("00" "20" "40")
 
-    if [[ "${UVI_TIME[*]}" =~ "${MIN}" ]] || [[ $DIFF -lt 29 ]]; then 
+    if [[ "${UVI_TIME[*]}" =~ "${MIN}" || $DIFF -lt 29 ]]; then 
 
       SENSOR_NAME="sensor.uvi_current"
       UVI_VALUE=$(/share/shellsensors/uvi.pl)
@@ -36,7 +36,7 @@ main() {
 
     FORECAST_TIME=("00" "10" "20" "30" "40" "50")
 
-    if [[ "${FORECAST_TIME[*]}" =~ "${MIN}" ]] || [[ $DIFF -lt 29 ]]; then 
+    if [[ "${FORECAST_TIME[*]}" =~ "${MIN}" || $DIFF -lt 29 ]]; then 
 
       SENSOR_NAME="sensor.openweather_current"
       UFORECAST_VALUE=$(/share/shellsensors/weather.pl)
