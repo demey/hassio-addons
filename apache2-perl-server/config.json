@@ -1,10 +1,10 @@
 {
    "name": "Apache HTTP Server",
-   "version": "2022.08.11-0",
+   "version": "2022.08.11-1",
    "slug": "apache2-perl-server",
    "description": "Apache HTTP Server",
    "url": "https://github.com/demey/hassio-addons/tree/master/apache2-perl-server",
-   "startup": "application",
+   "startup": "system",
    "init": false,
    "uart": true,
    "udev": true,
