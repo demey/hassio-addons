@@ -7,20 +7,20 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 COPY rootfs /
 
 # Setup base
-#RUN apk --update upgrade && \
-#    apk add --no-cache curl perl perl-net-ssleay perl-crypt-ssleay perl-lwp-useragent-determined perl-lwp-protocol-https perl-file-slurp apache-mod-fcgid perl-fcgi
+RUN apk --update upgrade && \
+    apk add --no-cache curl perl perl-net-ssleay perl-crypt-ssleay perl-lwp-useragent-determined perl-lwp-protocol-https perl-file-slurp apache-mod-fcgid perl-fcgi
 
-#RUN apk add --no-cache --virtual .build-deps gcc make build-base perl-dev && \
-#    echo 'yes' | perl -MCPAN -e 'install (JSON::Parse)' && \
-#    apk del .build-deps
+RUN apk add --no-cache --virtual .build-deps gcc make build-base perl-dev && \
+    echo 'yes' | perl -MCPAN -e 'install (JSON::Parse)' && \
+    apk del .build-deps
 
-#RUN sed -i 's,^ServerRoot .*,ServerRoot /share/apache2,g' /etc/apache2/httpd.conf && \
-#    sed -i 's,^Listen .*,Listen 8001,g' /etc/apache2/httpd.conf && \
-#    sed -i 's,^DocumentRoot ".*,DocumentRoot "/share/apache2/html",g' /etc/apache2/httpd.conf && \
-#    sed -i 's,Directory "/var/www/localhost/htdocs.*,Directory "/share/apache2/html">,g' /etc/apache2/httpd.conf && \
-#    sed -i 's,/var/www/localhost/cgi-bin,/share/apache2/cgi-bin,g' /etc/apache2/httpd.conf && \
-#    sed -i 's,#LoadModule cgi,LoadModule cgi,g' /etc/apache2/httpd.conf && \
-#    sed -i 's,/var/log/apache2/,/share/apache2/logs/,g' /etc/logrotate.d/apache2
+RUN sed -i 's,^ServerRoot .*,ServerRoot /share/apache2,g' /etc/apache2/httpd.conf && \
+    sed -i 's,^Listen .*,Listen 8001,g' /etc/apache2/httpd.conf && \
+    sed -i 's,^DocumentRoot ".*,DocumentRoot "/share/apache2/html",g' /etc/apache2/httpd.conf && \
+    sed -i 's,Directory "/var/www/localhost/htdocs.*,Directory "/share/apache2/html">,g' /etc/apache2/httpd.conf && \
+    sed -i 's,/var/www/localhost/cgi-bin,/share/apache2/cgi-bin,g' /etc/apache2/httpd.conf && \
+    sed -i 's,#LoadModule cgi,LoadModule cgi,g' /etc/apache2/httpd.conf && \
+    sed -i 's,/var/log/apache2/,/share/apache2/logs/,g' /etc/logrotate.d/apache2
 
 # Build arguments
 ARG BUILD_ARCH
