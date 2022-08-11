@@ -11,4 +11,5 @@ mkdir -p /share/apache2/cgi-bin
 cp -r /var/www/modules /share/apache2
 
 bashio::log.info "Starting the Apache HTTP Server..."
-exec /usr/bin/run1.sh
+#exec /usr/bin/run1.sh
+exec httpd
