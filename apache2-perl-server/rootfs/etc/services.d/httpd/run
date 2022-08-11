@@ -1,6 +1,6 @@
 #!/usr/bin/with-contenv bashio
 # ==============================================================================
-# Home Assistant Add-on: Local web-server in HA
+# Home Assistant Add-on: Apache HTTP Server
 # Runs httpd
 # ==============================================================================
 
@@ -11,4 +11,4 @@ mkdir -p /share/apache2/cgi-bin
 cp -r /var/www/modules /share/apache2
 
 bashio::log.info "Starting the Apache HTTP Server..."
-exec /usr/sbin/httpd -k start
+exec /usr/bin/run1.sh
