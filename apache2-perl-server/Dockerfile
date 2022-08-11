@@ -11,9 +11,9 @@ RUN apk --update upgrade && \
     apk add --no-cache curl mosquitto-clients perl perl-net-ssleay perl-crypt-ssleay perl-lwp-useragent-determined perl-lwp-protocol-https perl-file-slurp apache-mod-fcgid perl-fcgi perl-cgi perl-switch
 
 RUN apk add --no-cache --virtual .build-deps gcc make build-base perl-dev && \
-    echo 'yes' | perl -MCPAN -e 'install (JSON::Parse)' && \
-    perl -MCPAN -e 'install (Net::SSL::ExpireDate)' && \
-    apk del .build-deps
+    echo 'yes' | perl -MCPAN -e 'install (JSON::Parse)'
+#    perl -MCPAN -e 'install (Net::SSL::ExpireDate)' && \
+#    apk del .build-deps
 
 RUN sed -i 's,^ServerRoot .*,ServerRoot /share/apache2,g' /etc/apache2/httpd.conf && \
     sed -i 's,^Listen .*,Listen 8001,g' /etc/apache2/httpd.conf && \
