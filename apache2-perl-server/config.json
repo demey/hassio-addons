@@ -1,8 +1,8 @@
 {
-   "name": "Local web-server in HA",
-   "version": "2022.08.10-5",
+   "name": "Apache HTTP Server",
+   "version": "2022.08.11-0",
    "slug": "apache2-perl-server",
-   "description": "Local web-server in HA",
+   "description": "Apache HTTP Server",
    "url": "https://github.com/demey/hassio-addons/tree/master/apache2-perl-server",
    "startup": "application",
    "init": false,
