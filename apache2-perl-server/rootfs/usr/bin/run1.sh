@@ -1,4 +1,4 @@
-#!/usr/bin/with-contenv bashio
+#!/command/with-contenv bashio
 # ==============================================================================
 # Home Assistant Add-on: Apache HTTP Server
 # ==============================================================================
@@ -9,5 +9,4 @@ main() {
     sleep 60
   done
 }
-
 main "$@"

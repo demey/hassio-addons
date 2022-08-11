@@ -1,14 +1,14 @@
-#!/usr/bin/with-contenv bashio
+
 # ==============================================================================
 # Home Assistant Add-on: Apache HTTP Server
 # Runs httpd
 # ==============================================================================
 
-mkdir -p /share/apache2
-mkdir -p /share/apache2/logs
-mkdir -p /share/apache2/html
-mkdir -p /share/apache2/cgi-bin
-cp -r /var/www/modules /share/apache2
+#mkdir -p /share/apache2
+#mkdir -p /share/apache2/logs
+#mkdir -p /share/apache2/html
+#mkdir -p /share/apache2/cgi-bin
+#cp -r /var/www/modules /share/apache2
 
 exec /usr/bin/run1.sh
 #httpd -k start
