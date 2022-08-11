@@ -12,6 +12,7 @@ RUN apk --update upgrade && \
 
 RUN apk add --no-cache --virtual .build-deps gcc make build-base perl-dev && \
     echo 'yes' | perl -MCPAN -e 'install (JSON::Parse)' && \
+    perl -MCPAN -e 'install (Net::SSL::ExpireDate)' && \
     apk del .build-deps
 
 RUN sed -i 's,^ServerRoot .*,ServerRoot /share/apache2,g' /etc/apache2/httpd.conf && \
