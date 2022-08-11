@@ -1,6 +1,6 @@
 {
    "name": "Shell Sensors in HA",
-   "version": "2022.08.10-4",
+   "version": "2022.08.10-5",
    "slug": "shellsensors",
    "description": "Adding different types of shell sensors to HA",
    "url": "https://github.com/demey/hassio-addons/tree/master/shellsensors",

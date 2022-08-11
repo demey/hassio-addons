@@ -21,11 +21,11 @@ main() {
     MIN=$(date +"%M")
     NOW=$(date +"%s")
     DIFF=$(($NOW-$UPTIME))
-    echo $DIFF >> $LOG_FILE
+
     UVI_TIME=("00" "20" "40")
 
     if [[ "${UVI_TIME[*]}" =~ "${MIN}" || $DIFF -lt 29 ]]; then 
-      echo "S1" >> $LOG_FILE
+
       SENSOR_NAME="sensor.uvi_current"
       UVI_VALUE=$(/share/shellsensors/uvi.pl)
       SENSOR_DATA='{"state": "'"$UVI_VALUE"'", "attributes": {"friendly_name":"'"УФ Індекс"'","icon":"mdi:sun-wireless","state_class":"measurement"}}'
