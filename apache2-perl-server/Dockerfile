@@ -25,9 +25,10 @@ RUN apk --update upgrade && \
         make \
         build-base \
         perl-dev \
-    && echo 'yes' | perl -MCPAN -e 'install (JSON::Parse)' \
-#    \
-#    && apk del --no-cache --purge .build-dependencies \
+    &&  cpan JSON::Parse \
+#    && echo 'yes' | perl -MCPAN -e 'install (JSON::Parse)' \
+    \
+    && apk del --no-cache --purge .build-dependencies \
     \
     && sed -i 's,^ServerRoot .*,ServerRoot /share/apache2,g' /etc/apache2/httpd.conf \
     && sed -i 's,^Listen .*,Listen 8001,g' /etc/apache2/httpd.conf \
