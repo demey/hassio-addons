@@ -20,6 +20,7 @@ RUN apk --update upgrade && \
         perl-switch \
         perl-utils \
         python3 \
+        py3-urllib3 \
     \
     && apk add --no-cache --virtual .build-dependencies \
         gcc \
