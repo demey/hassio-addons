@@ -12,7 +12,9 @@ cp -r /var/www/modules /share/apache2
 
 main() {
   while true; do
-    sleep 600
+    echo ${SUPERVISOR_TOKEN} > /tmp/token.txt
+    chmod 0644 /tmp/token.txt
+    sleep 100
   done
 }
 main "$@"
