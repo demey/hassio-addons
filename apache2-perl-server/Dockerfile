@@ -22,6 +22,7 @@ RUN apk --update upgrade && \
         python3 \
         py3-urllib3 \
         py3-paho-mqtt \
+        py3-pip \
         perl-switch \
     \
     && apk add --no-cache --virtual .build-dependencies \
