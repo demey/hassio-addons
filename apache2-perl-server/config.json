@@ -13,6 +13,7 @@
    "homeassistant_api": true,
    "map": ["share:rw"],
    "ports": {
-      "8001/tcp": 8001
+      "8001/tcp": 8001,
+      "5000/tcp": 5000
    }
 }
