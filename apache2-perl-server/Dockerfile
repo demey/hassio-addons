@@ -38,7 +38,9 @@ RUN apk --update upgrade && \
     && sed -i 's,^Listen .*,Listen 8001,g' /etc/apache2/httpd.conf \
     && sed -i 's,^DocumentRoot ".*,DocumentRoot "/share/apache2/html",g' /etc/apache2/httpd.conf \
     && sed -i 's,Directory "/var/www/localhost/htdocs.*,Directory "/share/apache2/html">,g' /etc/apache2/httpd.conf \
-    && sed -i 's,/var/www/localhost/cgi-bin,/share/apache2/cgi-bin,g' /etc/apache2/httpd.conf \
+    && sed -i 's,/var/www/localhost/cgi-bin,/share/apache2/cgi-bin,g' /etc/apache2/httpd.conf \    
+    && sed -i 's,Options None,Options ExecCGI,g' /etc/apache2/httpd.conf \
+    && sed -i 's,Require all granted,Require all granted\n    AddHandler cgi-script .pl .py,g' /etc/apache2/httpd.conf \
     && sed -i 's,#LoadModule cgi,LoadModule cgi,g' /etc/apache2/httpd.conf \
     && sed -i 's,/var/log/apache2/,/share/apache2/logs/,g' /etc/logrotate.d/apache2
 
