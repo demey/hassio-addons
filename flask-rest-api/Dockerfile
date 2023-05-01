@@ -14,6 +14,11 @@ RUN apk --update upgrade && \
 # Copy root filesystem
 COPY rootfs /
 
+# Copy requirements
+COPY requirements.txt /tmp/requirements.txt
+
+RUN pip install -r /tmp/requirements.txt
+
 # Build arguments
 ARG BUILD_ARCH
 ARG BUILD_DATE
