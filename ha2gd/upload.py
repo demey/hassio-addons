@@ -8,9 +8,11 @@ from signal import signal, SIGPIPE, SIG_DFL
 signal(SIGPIPE,SIG_DFL) 
 g_history_days = 9 #days to keep history on Google Drive
 l_history_days = 3 #days to keep history locally
+logfile = "update_log.txt"
 workdir = "/share/ha2gd/"
-os_root = "/config/media/camera/"
+os_root = "/media/cctv/cctv/entrance/"
 gdrive_root_id = "" #fill it by own value
+os.environ['TZ'] = "" #fill it by own value
 
 
 def upload_handler(gauth, os_root_path, gdrive_root_folder_id):
@@ -26,23 +28,23 @@ def upload_handler(gauth, os_root_path, gdrive_root_folder_id):
     oldest_folder = min(g_folders.keys())
     delete_item = drive.CreateFile({'id': g_folders[oldest_folder]})
     delete_item.Delete()
-    with open(workdir + 'update_log.txt', 'a') as update_log:
+    with open(workdir + logfile, 'a') as update_log:
       update_log.write( '\n' + 'Deleted gdrive folder: %s %s' % (oldest_folder, str(datetime.now())))
     g_folders.pop(oldest_folder, None)
 
-#  l_folders = os.listdir(os_root_path)
-  l_folders = [d for d in os.listdir(os_root_path) if os.path.isdir(d)]
+  l_folders = os.listdir(os_root_path)
+#  l_folders = [d for d in os.listdir(os_root_path) if os.path.isdir(d)]
 
   if len(l_folders) > l_history_days:
     shutil.rmtree(os_root_path + min(l_folders))
-    with open(workdir + 'update_log.txt', 'a') as update_log:
+    with open(workdir + logfile, 'a') as update_log:
       update_log.write( '\n' + 'Deleted local folder: %s %s' % (min(l_folders), str(datetime.now())))
     l_folders.remove(min(l_folders))
 
   for l_folder in l_folders:
     if l_folder not in g_folders.keys():
       new_g_folder_id = create_folder(drive, l_folder, gdrive_root_folder_id)
-      with open(workdir + 'update_log.txt', 'a') as update_log:
+      with open(workdir + logfile, 'a') as update_log:
         update_log.write( '\n' + 'Created new gdrive folder: %s %s' % (l_folder, str(datetime.now())))
       g_folders[l_folder] = new_g_folder_id
 
@@ -61,7 +63,7 @@ def upload_handler(gauth, os_root_path, gdrive_root_folder_id):
       file_path = os.path.join(os_root_path + newest_folder, item)
       new_file.SetContentFile(file_path)
       new_file.Upload()
-      with open(workdir + 'update_log.txt', 'a') as update_log:
+      with open(workdir + logfile, 'a') as update_log:
         update_log.write( '\n' + 'Uploaded file to GD: %s %s' % (item, str(datetime.now())))
 
 
@@ -76,6 +78,12 @@ def create_folder(drive, folder_name, parent_folder_id):
   folder = drive.CreateFile(folder_metadata)
   folder.Upload()
   return folder['id']
+
+
+def rotate_log():
+  file_size = os.path.getsize(workdir + logfile)
+  if file_size > 524288:
+    os.rename(workdir + logfile, f"{workdir}{logfile}.{datetime.now():%Y%m%d}")
 
 
 gauth = GoogleAuth()
@@ -101,4 +109,4 @@ gauth.SaveCredentialsFile(workdir + 'credentials.json')
 
 #gauth.LocalWebserverAuth()
 upload_handler(gauth, os_root, gdrive_root_id)
-
+rotate_log()
