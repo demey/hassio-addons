@@ -1,5 +1,8 @@
 ARG BUILD_FROM
 FROM ${BUILD_FROM}
+COPY rootfs /
+RUN apk add --no-cache python3 py3-pip
+RUN pip3 install pydrive
 
 ARG BUILD_ARCH
 ARG BUILD_DATE
@@ -24,9 +27,3 @@ LABEL \
     org.opencontainers.image.created=${BUILD_DATE} \
     org.opencontainers.image.revision=${BUILD_REF} \
     org.opencontainers.image.version=${BUILD_VERSION}
-
-RUN apk add --no-cache python3 py3-pip && \
-    python3 -m pip install --no-cache-dir pydrive
-
-COPY data/run.sh /
-CMD [ "/run.sh" ]
