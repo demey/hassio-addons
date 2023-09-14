@@ -1,7 +1,0 @@
-#!/usr/bin/with-contenv bashio
-# ==============================================================================
-# Home Assistant Add-on: ha2gd
-# Runs ha2gd script
-# ==============================================================================
-bashio::log.info "Starting ha2gd service"
-exec /usr/bin/run.sh

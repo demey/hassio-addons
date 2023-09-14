@@ -1,6 +1,6 @@
 {
    "name": "Camera Videos Google Backup",
-   "version": "1.0.9",
+   "version": "1.1.0",
    "slug": "ha2gd",
    "description": "Sync folders with Google Drive",
    "url": "https://github.com/demey/hassio-addons/tree/master/ha2gd",
