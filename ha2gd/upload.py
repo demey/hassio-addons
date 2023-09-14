@@ -1,4 +1,5 @@
 import os
+import sys
 import shutil
 from pydrive.drive import GoogleDrive 
 from pydrive.auth import GoogleAuth
@@ -81,9 +82,11 @@ def create_folder(drive, folder_name, parent_folder_id):
 
 
 def rotate_log():
-  file_size = os.path.getsize(workdir + logfile)
-  if file_size > 524288:
-    os.rename(workdir + logfile, f"{workdir}{logfile}.{datetime.now():%Y%m%d}")
+  if os.path.exists(workdir + logfile)
+    file_size = os.path.getsize(workdir + logfile)
+  
+    if file_size > 524288:
+      os.rename(workdir + logfile, f"{workdir}{logfile}.{datetime.now():%Y%m%d}")
 
 
 gauth = GoogleAuth()
