@@ -25,9 +25,8 @@ LABEL \
     org.opencontainers.image.revision=${BUILD_REF} \
     org.opencontainers.image.version=${BUILD_VERSION}
 
-COPY rootfs /
 RUN apk add --no-cache python3 py3-pip && \
     python3 -m pip install --no-cache-dir pydrive
 
-CMD [ "/usr/bin/run.sh" ]
-
+COPY data/run.sh /
+CMD [ "/run.sh" ]
