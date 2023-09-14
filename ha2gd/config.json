@@ -11,7 +11,6 @@
    "hassio_api": true,
    "hassio_role": "default",
    "map": ["media:rw", "share:rw"],
-   "image": "homeassistant/{arch}-addon-ha2gd",
    "options": {
       "sync_interval": 300
    },
