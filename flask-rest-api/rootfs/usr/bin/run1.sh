@@ -4,7 +4,7 @@
 # ==============================================================================
 
 cd /share/flask
-#flask --app main run --host=0.0.0.0 -p 5001
+flask --app main run --host=0.0.0.0 -p 5001
 
 #main() {
 #  while true; do
