@@ -1,0 +1,15 @@
+---
+build_from:
+  aarch64: "hassioaddons/base-aarch64:8.0.6"
+  amd64: "hassioaddons/base-amd64:8.0.6"
+  armhf: "hassioaddons/base-armhf:8.0.6"
+  armv7: "hassioaddons/base-armv7:8.0.6"
+  i386: "hassioaddons/base-i386:8.0.6"
+labels:
+  io.hass.name: "ha2gd"
+  io.hass.description: "Sync folders with google drive"
+  org.opencontainers.image.title: "ha2gd"
+  org.opencontainers.image.description: "Sync folders with Google Drive"
+  org.opencontainers.image.vendor: "Home Assistant Custom Add-on"
+  org.opencontainers.image.source: "https://github.com/demey/hassio-addons/tree/master/ha2gd"
+  org.opencontainers.image.licenses: "MIT"
