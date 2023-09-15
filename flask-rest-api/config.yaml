@@ -1,5 +1,5 @@
 ---
-version: "2023.09.15-1"
+version: "2023.09.15-2"
 name: Flask REST-API
 slug: flask-rest-api
 description: Flask REST-API functionality
