@@ -17,6 +17,6 @@ homeassistant_api: true
 map:
   - share:rw
 ports:
-  5001/tcp: null
+  5001/tcp: 5001
 startup: system
 init: false
