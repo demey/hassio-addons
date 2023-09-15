@@ -1,7 +1,0 @@
-#!/usr/bin/with-contenv bashio
-# ==============================================================================
-# Home Assistant Add-on: shellsensors
-# Runs shellsensors script
-# ==============================================================================
-bashio::log.info "Starting shellsensors"
-exec /usr/bin/run1.sh
