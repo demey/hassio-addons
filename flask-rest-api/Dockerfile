@@ -1,5 +1,5 @@
 ARG BUILD_FROM
-FROM ${BUILD_FROM}
+FROM --platform=linux/amd64 ${BUILD_FROM}
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
