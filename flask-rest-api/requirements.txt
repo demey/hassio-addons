@@ -3,3 +3,4 @@ paho-mqtt
 python-aqi
 requests
 python-telegram
+pytz
