@@ -7,6 +7,6 @@
 
 bashio::log.info 'Starting Radarr...'
 
-chmod +x /share/air-raid/raid
+chmod +x /opt/bin/raid
 
-exec /share/air-raid/raid /share/air-raid/settings.yml
+exec /opt/bin/raid /share/air-raid/settings.yml
