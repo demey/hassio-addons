@@ -1,5 +1,5 @@
 ---
-version: "2024.10.29-6"
+version: "2024.10.29-7"
 name: Air Raid Alert Ukraine
 slug: air-raid-alert-ua
 description: Air Raid Alert Ukraine
@@ -16,5 +16,5 @@ map:
 ports:
   10101/tcp: 10101
   1024/tcp: 1024
-startup: system
+startup: application
 init: false
