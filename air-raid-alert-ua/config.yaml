@@ -1,0 +1,20 @@
+---
+version: "2024.10.29-0"
+name: Air Raid Alert Ukraine
+slug: air-raid-alert-ua
+description: Air Raid Alert Ukraine
+url: https://github.com/demey/hassio-addons/tree/master/air-raid-alert-ua
+arch:
+  - armv7
+  - aarch64
+  - amd64
+init: false
+hassio_api: true
+homeassistant_api: true
+map:
+  - share:rw
+ports:
+  10101/tcp: 10101
+  1024/tcp: 1024
+startup: application
+init: false
