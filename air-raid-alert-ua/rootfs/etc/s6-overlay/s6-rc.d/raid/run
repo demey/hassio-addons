@@ -7,4 +7,6 @@
 
 bashio::log.info 'Starting Air Raid Alert Ukraine...'
 
+chmod +x /share/air-raid/raid
+
 exec /share/air-raid/raid
