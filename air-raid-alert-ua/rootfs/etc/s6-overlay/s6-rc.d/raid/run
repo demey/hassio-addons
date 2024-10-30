@@ -9,10 +9,12 @@ bashio::log.info 'Starting Air Raid Alert Ukraine...'
 
 chmod +x /share/air-raid/raid
 
-exec /share/air-raid/raid /share/air-raid/settings.yml
+cd /share/air-raid
 
-while true; do
-  echo "service running..."
-  sleep 30
-done
+exec /share/air-raid/raid
+
+#while true; do
+#  echo "service running..."
+#  sleep 30
+#done
 
