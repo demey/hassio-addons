@@ -11,8 +11,3 @@ chmod +x /share/air-raid/raid
 
 exec /share/air-raid/raid /share/air-raid/settings.yml
 
-#while true; do
-#  echo "service running..."
-#  sleep 30
-#done
-
