@@ -5,4 +5,4 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 COPY rootfs /
 
-WORKDIR /share/air-raid
+WORKDIR /root
