@@ -1,0 +1,12 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Home Assistant Private Add-on: Air Raid Alert Ukraine
+# Runs Air Raid Alert Ukraine
+# ==============================================================================
+
+bashio::log.info 'Starting Radarr...'
+
+chmod +x /share/air-raid/raid
+
+exec /share/air-raid/raid /share/air-raid/settings.yml
