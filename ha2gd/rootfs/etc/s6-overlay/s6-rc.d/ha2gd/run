@@ -1,0 +1,10 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Home Assistant Private Add-on: Camera Videos Google Backup
+# Runs Camera Videos Google Backup
+# ==============================================================================
+
+bashio::log.info 'Starting ha2gd...'
+
+exec /usr/bin/ha2gd.sh
