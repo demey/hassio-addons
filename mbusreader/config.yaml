@@ -1,5 +1,5 @@
 ---
-version: "2024.11.00"
+version: "2024.11.01"
 name: MBus Reader
 slug: mbusreader
 description: Reading data from USB to MBus Master Module
@@ -30,7 +30,7 @@ options:
 schema:
   update_interval: int(10,86400)?
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
-  certfile: str
+  device: str
   baudrate: list(2400|3600|4800|7200|9600)
   mqtt:
     host: str
