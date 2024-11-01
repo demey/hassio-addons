@@ -7,4 +7,4 @@
 
 bashio::log.info 'Starting MBus Reader...'
 
-exec /usr/bin/run1.sh
+exec /usr/bin/mbusreader.sh
