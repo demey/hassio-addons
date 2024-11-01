@@ -7,4 +7,6 @@
 
 bashio::log.info 'Starting ha2gd...'
 
+chmod +x /usr/bin/ha2gd.sh
+
 exec /usr/bin/ha2gd.sh
