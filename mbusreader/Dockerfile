@@ -8,7 +8,7 @@ COPY rootfs /
 
 # Setup base
 RUN apk --update upgrade && \
-    apk --no-cache add coreutils mosquitto-clients libxml2-utils git python3 py3-pip py-lxml && \
+    apk --no-cache add coreutils mosquitto-clients libxml2-utils git python3 py3-pip py3-lxml && \
     pip install xq yq && \
     cd /tmp && git clone https://github.com/rscada/libmbus.git
 RUN apk add --no-cache --virtual .build-deps autoconf automake libtool build-base && \
