@@ -1,7 +1,0 @@
-#!/usr/bin/with-contenv bashio
-# ==============================================================================
-# Home Assistant Add-on: Flask Application
-# Runs Flask
-# ==============================================================================
-bashio::log.info "Starting Flask Application"
-exec /usr/bin/run1.sh
