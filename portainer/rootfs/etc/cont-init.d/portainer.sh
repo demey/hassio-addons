@@ -1,8 +1,6 @@
-#!/command/with-contenv bashio
-# shellcheck shell=bash
+#!/usr/bin/with-contenv bashio
 # ==============================================================================
 # Home Assistant Private Add-on: Portainer
-# Example init script, runs before any other service
+# Runs some initializations for Portainer
 # ==============================================================================
-
 bashio::require.unprotected
