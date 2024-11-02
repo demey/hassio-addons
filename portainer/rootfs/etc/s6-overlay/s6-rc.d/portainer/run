@@ -1,11 +1,13 @@
 #!/command/with-contenv bashio
+# shellcheck shell=bash
 # ==============================================================================
 # Home Assistant Private Add-on: Portainer
-# Runs portainer
+# Runs Portainer
 # ==============================================================================
 declare -a options
 export AGENT_SECRET
 
+bashio::require.unprotected
 bashio::log.info 'Starting Portainer...'
 
 options+=(--data /data)
