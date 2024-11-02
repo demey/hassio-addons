@@ -1,8 +1,7 @@
-#!/command/with-contenv bashio
-# shellcheck shell=bash
+#!/usr/bin/with-contenv bashio
 # ==============================================================================
 # Home Assistant Private Add-on: Portainer
-# Runs Portainer
+# Runs portainer
 # ==============================================================================
 declare -a options
 export AGENT_SECRET
