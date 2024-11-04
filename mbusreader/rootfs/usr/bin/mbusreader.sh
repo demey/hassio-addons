@@ -32,7 +32,7 @@ main() {
     while read mbusmeters; do
       echo "$(date '+%Y-%m-%d %H:%M:%S') Getting data from $mbusmeters ... " >> $LOG_FILE
       # The sed is for replacing the @ with _ to be able to match on it in HASS templates
-      METER_DATA=$(mbus-serial-request-data-multi-reply -b $BAUDRATE $DEVICE $mbusmeters | xq . | sed -e "s/@/_/")
+      METER_DATA=$(mbus-serial-request-data-multi-reply -b $BAUDRATE $DEVICE $mbusmeters | jc --xml | jq | sed -e "s/@/_/")
       echo "$(date '+%Y-%m-%d %H:%M:%S') $METER_DATA" >> $LOG_FILE
       mosquitto_pub -h $MQTT_HOST -p $MQTT_PORT -u $MQTT_USER -P $MQTT_PASS -t $MQTT_TOPIC/$mbusmeters -r -m "${METER_DATA}"
       BYTCNT=$(echo "$METER_DATA" | wc -c)
