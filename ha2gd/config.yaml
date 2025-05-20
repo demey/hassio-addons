@@ -12,6 +12,7 @@ arch:
   - i386
 init: false
 hassio_api: true
+homeassistant_api: true
 map:
   - share:rw
   - media:rw
