@@ -1,5 +1,5 @@
 ---
-version: "2025.05.20-2"
+version: "2025.05.20-3"
 name: Proton Drive Folder Sync
 slug: pdsync
 description: Sync folders with Proton Drive
