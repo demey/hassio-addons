@@ -26,7 +26,7 @@ main() {
       -H "Authorization: Bearer $SUPERVISOR_TOKEN" \
       -H "Content-Type: application/json" \
       -d '{"state": ${used}, "attributes": {"friendly_name": "Proton Drive used space", "unit_of_measurement": "Gb", "icon": "mdi:cloud-upload"}}' \
-      http://supervisor/api/states/sensor.pdrive_used_space \
+      http://supervisor/core/api/states/sensor.pdrive_used_space \
     /
 #    bashio::log.info "Space used on drive: ${used} Gb"
 
