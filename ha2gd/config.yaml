@@ -1,5 +1,5 @@
 ---
-version: "2025.05.19"
+version: "2025.05.20"
 name: Camera Videos Google Backup
 slug: ha2gd
 description: Sync folders with Google Drive
