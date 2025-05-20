@@ -1,0 +1,12 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Home Assistant Private Add-on: Proton Drive Folder Sync
+# Runs Proton Drive Folder Sync
+# ==============================================================================
+
+bashio::log.info 'Starting Proton Drive Folder Sync...'
+
+chmod +x /usr/bin/pdsync.sh
+
+exec /usr/bin/pdsync.sh
