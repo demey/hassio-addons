@@ -25,9 +25,9 @@ main() {
     bashio::log.info "Space used on drive: ${used} Gb"
 
     for folder in $(bashio::config 'folders|keys'); do
-#      bashio::log.info "Working with ${folder}"
-      bashio::config.require.local_folder "folders[${folder}].local_folder"
-      bashio::config.require.remote_folder "folders[${folder}].remote_folder"
+      bashio::log.info "Working with ${folder}"
+#      bashio::config.require.local_folder "folders[${folder}].local_folder"
+#      bashio::config.require.remote_folder "folders[${folder}].remote_folder"
 
       local_folder=$(bashio::config "folders[${folder}].local_folder")
       remote_folder=$(bashio::config "folders[${folder}].remote_folder")
