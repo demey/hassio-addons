@@ -32,10 +32,7 @@ main() {
       local_folder=$(bashio::config "folders[${folder}].local_folder")
       remote_folder=$(bashio::config "folders[${folder}].remote_folder")
 
-      oldest=`ls -tcr $local_folder | head -1`
-      bashio::log.info "Oldest folder is ${local_folder}/${oldest}"
-
-     while [ `ls -1 | wc -l` -gt $days ]; do
+     while [ `ls -tcr $local_folder | wc -l` -gt $days ]; do
        oldest=`ls -tcr $local_folder | head -1`
        bashio::log.info "Removing oldest folder ${local_folder}/${oldest}"
        rm -rf "${local_folder}/${oldest}"
