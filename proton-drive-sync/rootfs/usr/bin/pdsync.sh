@@ -15,7 +15,7 @@ main() {
 
   days=$(bashio::config 'days')
   sleep=$(bashio::config 'sync_interval')
-  rclone_config=$(bashio::config 'rclone_config_path')
+  rclone_config=$(bashio::config 'rclone_config')
 
   RCLONE_CONFIG=${rclone_config}
   export RCLONE_CONFIG
