@@ -13,7 +13,7 @@ main() {
   declare remote_folder
   declare rclone_config
 
-  days=$(bashio::config 'days')
+  days=$(bashio::config 'days_keep')
   sleep=$(bashio::config 'sync_interval')
   rclone_config=$(bashio::config 'rclone_config')
 
