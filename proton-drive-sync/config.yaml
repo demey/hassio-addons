@@ -15,12 +15,12 @@ map:
   - share:rw
   - media:rw
 options:
-  foldes: []
+  folders: []
   days_keep: 3
   rclone_config: /share/pdsync/rclone.conf
   sync_interval: 600
 schema:
-  foldes:
+  folders:
     - local_folder: str
       remote_folder: str
   days_keep: int(2,365)?

@@ -20,11 +20,12 @@ main() {
   RCLONE_CONFIG=${rclone_config}
   export RCLONE_CONFIG
 
-  used=`rclone about protondrive: | grep Used: | awk '{print $2}'`
-  bashio::log.info "Space used on drive: ${used} Gb"
-
   while true; do
+    used=`rclone about protondrive: | grep Used: | awk '{print $2}'`
+    bashio::log.info "Space used on drive: ${used} Gb"
+
     for folder in $(bashio::config 'folders|keys'); do
+#      bashio::log.info "Working with ${folder}"
       bashio::config.require.local_folder "folders[${folder}].local_folder"
       bashio::config.require.remote_folder "folders[${folder}].remote_folder"
 
@@ -42,7 +43,10 @@ main() {
 
       bashio::log.info "Syncing ${local_folder} with ${remote_folder}"
       result=`rclone sync --protondrive-replace-existing-draft=true $local_folder protondrive:$remote_folder`
-      bashio::log.info ${result}
+
+      if [ $? -ne 0 ]; then
+        bashio::log.warn ${result}
+      fi
     done
     sleep "${sleep}"
   done
