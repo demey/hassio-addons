@@ -1,13 +1,13 @@
 #!/command/with-contenv bashio
 # shellcheck shell=bash
 # ==============================================================================
-# Home Assistant Private Add-on: Camera Videos Google Backup
-# Take down the S6 supervision tree when Camera Videos Google Backup fails
+# Home Assistant Private Add-on: Proton Drive Folder Sync
+# Take down the S6 supervision tree when Proton Drive Folder Sync fails
 # ==============================================================================
 readonly exit_code_container=$(</run/s6-linux-init-container-results/exitcode)
 readonly exit_code_service="${1}"
 readonly exit_code_signal="${2}"
-readonly service="Camera Videos Google Backup"
+readonly service="Proton Drive Folder Sync"
 
 bashio::log.info \
   "Service ${service} exited with code ${exit_code_service}" \
