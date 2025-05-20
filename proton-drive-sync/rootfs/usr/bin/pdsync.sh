@@ -22,13 +22,11 @@ main() {
 
   while true; do
     used=`rclone about protondrive: | grep Used: | awk '{print $2}'`
-    curl -s \
-      -H "Authorization: Bearer $SUPERVISOR_TOKEN" \
-      -H "Content-Type: application/json" \
-      -d '{"state": "'"$used"'", "attributes": {"friendly_name": "Proton Drive used space", "unit_of_measurement": "Gb", "icon": "mdi:cloud-upload"}}' \
-      http://supervisor/core/api/states/sensor.pdrive_used_space \
-    /
-#    bashio::log.info "Space used on drive: ${used} Gb"
+    result=`curl -s -H "Authorization: Bearer $SUPERVISOR_TOKEN" -H "Content-Type: application/json" -d '{"state": "'"$used"'", "attributes": {"friendly_name": "Proton Drive used space", "unit_of_measurement": "Gb", "icon": "mdi:cloud-upload"}}' http://supervisor/core/api/states/sensor.pdrive_used_space`
+
+    if [ $? -ne 0 ]; then
+      bashio::log.warn ${result}
+    fi
 
     for folder in $(bashio::config 'folders|keys'); do
       local_folder=$(bashio::config "folders[${folder}].local_folder")
