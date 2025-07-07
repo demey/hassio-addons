@@ -1,0 +1,24 @@
+---
+version: "2025.05.20"
+name: Camera Videos Google Backup
+slug: ha2gd
+description: Sync folders with Google Drive
+url: https://github.com/demey/hassio-addons/tree/master/ha2gd
+arch:
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+  - i386
+init: false
+hassio_api: true
+homeassistant_api: true
+map:
+  - share:rw
+  - media:rw
+options:
+  sync_interval: 300
+schema:
+  sync_interval: int(10,86400)?
+startup: application
+init: false

@@ -1,0 +1,13 @@
+---
+build_from:
+  aarch64: "ghcr.io/hassio-addons/base:16.3.4"
+  amd64: "ghcr.io/hassio-addons/base:16.3.4"
+  armv7: "ghcr.io/hassio-addons/base:16.3.4"
+labels:
+  io.hass.name: "mbusreader"
+  io.hass.description: "MBus Reader"
+  org.opencontainers.image.title: "mbusreader"
+  org.opencontainers.image.description: "Reading data from USB to MBus Master Module"
+  org.opencontainers.image.vendor: "Home Assistant Custom Add-on"
+  org.opencontainers.image.source: "https://github.com/demey/hassio-addons/tree/master/mbusreader"
+  org.opencontainers.image.licenses: "MIT"

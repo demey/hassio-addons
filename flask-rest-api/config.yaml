@@ -1,0 +1,20 @@
+---
+version: "2025.02.16"
+name: Flask REST-API
+slug: flask-rest-api
+description: Flask REST-API functionality
+url: https://github.com/demey/hassio-addons/tree/master/flask-rest-api
+arch:
+  - armv7
+  - aarch64
+  - amd64
+init: false
+hassio_api: true
+hassio_role: manager
+homeassistant_api: true
+map:
+  - share:rw
+ports:
+  5001/tcp: 5001
+startup: system
+init: false

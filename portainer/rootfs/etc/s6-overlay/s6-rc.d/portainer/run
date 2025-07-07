@@ -1,0 +1,23 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Home Assistant Private Add-on: Portainer
+# Runs Portainer
+# ==============================================================================
+declare -a options
+export AGENT_SECRET
+
+bashio::require.unprotected
+bashio::log.info 'Starting Portainer...'
+
+options+=(--data /data)
+options+=(--bind 0.0.0.0:8099)
+options+=(--host unix:///var/run/docker.sock)
+
+# Export agent secret, if defined
+if bashio::config.has_value 'agent_secret' ; then
+    AGENT_SECRET=$(bashio::config 'agent_secret')
+fi
+
+# Run Portainer
+exec /opt/portainer/portainer "${options[@]}"

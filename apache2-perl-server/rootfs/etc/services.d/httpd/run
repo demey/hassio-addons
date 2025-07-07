@@ -1,0 +1,7 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# Home Assistant Add-on: Apache HTTP Server
+# Runs httpd
+# ==============================================================================
+bashio::log.info "Starting Apache HTTP Server"
+exec /usr/bin/run1.sh

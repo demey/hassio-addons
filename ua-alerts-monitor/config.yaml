@@ -1,0 +1,27 @@
+---
+version: "2025.07.07"
+name: UA Alerts Monitor
+slug: alertsmonitor
+description: UA Alerts Monitor
+url: https://github.com/demey/hassio-addons/tree/master/ua-alerts-monitor
+arch:
+  - armv7
+  - aarch64
+  - amd64
+  - i386
+hassio_api: true
+homeassistant_api: true
+map:
+  - share:rw
+options:
+  max_message_length: 400
+  skip_key_words: 'Mono,збір,Андрій Смолій,колег,підключ,monobank,@kyiv_nebo2'
+  delete_key_words: '@smolii_ukraine|@smolii_ukraije|@war_monitor|@kyiv_nebo|#обстановка|може бути гучно'
+  sync_interval: 6
+schema:
+  max_message_length: int(100,600)?
+  skip_key_words: str
+  delete_key_words: str
+  sync_interval: int(6,12)?
+startup: application
+init: false

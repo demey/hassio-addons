@@ -1,0 +1,19 @@
+{
+   "name": "Apache HTTP Server",
+   "version": "2023.04.30-2",
+   "slug": "apache2-perl-server",
+   "description": "Apache HTTP Server",
+   "url": "https://github.com/demey/hassio-addons/tree/master/apache2-perl-server",
+   "startup": "system",
+   "init": false,
+   "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
+   "boot": "auto",
+   "hassio_api": true,
+   "hassio_role": "manager",
+   "homeassistant_api": true,
+   "map": ["share:rw"],
+   "ports": {
+      "8001/tcp": 8001,
+      "5000/tcp": 5000
+   }
+}

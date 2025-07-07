@@ -1,0 +1,42 @@
+---
+version: "2024.11.04"
+name: MBus Reader
+slug: mbusreader
+description: Reading data from USB to MBus Master Module
+url: https://github.com/demey/hassio-addons/tree/master/mbusreader
+arch:
+  - armv7
+  - aarch64
+  - amd64
+uart: true
+udev: true
+usb: true
+hassio_api: true
+hassio_role: manager
+homeassistant_api: true
+map:
+  - share:rw
+options:
+  update_interval: 900
+  log_level: debug
+  device: /dev/ttyUSB0
+  baudrate: 2400
+  mqtt:
+    host: "127.0.0.1"
+    port: 1883
+    username: ""
+    password: ""
+    topic: "mbusmeters"
+schema:
+  update_interval: int(10,86400)?
+  log_level: list(trace|debug|info|notice|warning|error|fatal)?
+  device: str
+  baudrate: list(2400|3600|4800|7200|9600)
+  mqtt:
+    host: str
+    port: int
+    username: str
+    password: password
+    topic: str
+startup: application
+init: false

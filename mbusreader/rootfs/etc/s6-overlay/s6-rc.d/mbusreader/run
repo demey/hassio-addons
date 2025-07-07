@@ -1,0 +1,10 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Home Assistant Private Add-on: MBus Reader
+# Runs MBus Reader
+# ==============================================================================
+
+bashio::log.info 'Starting MBus Reader...'
+
+exec /usr/bin/mbusreader.sh

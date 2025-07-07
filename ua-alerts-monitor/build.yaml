@@ -1,0 +1,14 @@
+---
+build_from:
+  aarch64: "ghcr.io/hassio-addons/base:18.0.2"
+  amd64: "ghcr.io/hassio-addons/base:18.0.2"
+  armv7: "ghcr.io/hassio-addons/base:18.0.2"
+  i386: "ghcr.io/hassio-addons/base:18.0.2"
+labels:
+  io.hass.name: "alertsmonitor"
+  io.hass.description: "UA Alerts Monitor"
+  org.opencontainers.image.title: "alertsmonitor"
+  org.opencontainers.image.description: "UA Alerts Monitor"
+  org.opencontainers.image.vendor: "Home Assistant Custom Add-on"
+  org.opencontainers.image.source: "https://github.com/demey/hassio-addons/tree/master/ua-alerts-monitor"
+  org.opencontainers.image.licenses: "MIT"

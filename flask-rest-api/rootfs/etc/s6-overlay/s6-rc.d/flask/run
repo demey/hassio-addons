@@ -1,0 +1,12 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Home Assistant Private Add-on: Flask
+# Runs Flask
+# ==============================================================================
+
+bashio::log.info 'Starting Flask...'
+
+cd /share/flask
+
+exec flask --app main run --host=0.0.0.0 -p 5001

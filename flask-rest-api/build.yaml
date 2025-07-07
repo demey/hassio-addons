@@ -1,0 +1,13 @@
+---
+build_from:
+  aarch64: "ghcr.io/hassio-addons/base:16.3.4"
+  amd64: "ghcr.io/hassio-addons/base:16.3.4"
+  armv7: "ghcr.io/hassio-addons/base:16.3.4"
+labels:
+  io.hass.name: "flask-rest-api"
+  io.hass.description: "Flask REST-API functionality"
+  org.opencontainers.image.title: "flask-rest-api"
+  org.opencontainers.image.description: "Flask REST-API functionality"
+  org.opencontainers.image.vendor: "Home Assistant Custom Add-on"
+  org.opencontainers.image.source: "https://github.com/demey/hassio-addons/tree/master/flask-rest-api"
+  org.opencontainers.image.licenses: "MIT"
