@@ -7,20 +7,7 @@
 
 bashio::log.info 'Starting UA Alerts Monitor...'
 
-#declare max_message_length
-#declare skip_key_words
-#declare delete_key_words
-
-#max_message_length=$(bashio::config 'max_message_length')
-#skip_key_words=$(bashio::config 'skip_key_words')
-#delete_key_words=$(bashio::config 'delete_key_words')
-
 mkdir -p /share/alertsmonitor
-
-#echo "[monitor]" > /share/alertsmonitor/config
-#echo "max_message_length=${max_message_length}" >> /share/alertsmonitor/config
-#echo "skip_key_words=${skip_key_words}" >> /share/alertsmonitor/config
-#echo "delete_key_words=${delete_key_words}" >> /share/alertsmonitor/config
 
 chmod +x /usr/bin/alertsmonitor.sh
 
