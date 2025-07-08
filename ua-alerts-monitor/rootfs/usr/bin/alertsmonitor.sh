@@ -12,10 +12,10 @@ main() {
   rm -f /var/run/monitor.pid
 
   while true; do
-#    echo "processing..."
-    if [ ! -f /var/run/monitor.pid ]; then
-      python /usr/bin/monitor.py
-    fi
+    echo "processing..."
+#    if [ ! -f /var/run/monitor.pid ]; then
+#      python /usr/bin/monitor.py
+#    fi
     sleep "${sync_interval}"
   done
 }
