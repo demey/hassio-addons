@@ -1,5 +1,6 @@
 import os
 import re
+import json
 import time
 import socket
 import logging
@@ -123,22 +124,18 @@ def main():
         p.write(str(os.getpid()))
         p.close()
     
-    CONFIG_FILE_NAME = "/share/alertsmonitor/config" 
-    config = configparser.ConfigParser()
-    config.read(CONFIG_FILE_NAME)
-    max_message_length = config['monitor']['max_message_length']
-    skip_key_words = config['monitor']['skip_key_words'].split(',')
-    delete_key_words = d=r"{}".format(config['monitor']['delete_key_words'])
+    with open('/data/options.json', 'r') as f:
+        config = json.load(f)
+        f.close()
     
-    chats_data = { 'smolii_ukraine': 'smolii.txt', 'kyiv_nebo': 'kyiv_nebo.txt', 'war_monitor': 'monitor.txt' }
     msg_posted = 0
 
-    for name in chats_data:
+    for channel in config['channels']:
         message_id = 0
-        url = f'https://t.me/s/{name}'
+        url = f'https://t.me/s/{channel}'
 
-        if os.path.exists(f'/share/alertsmonitor/{chats_data[name]}'):
-            f = open(f'/share/alertsmonitor/{chats_data[name]}', 'r')
+        if os.path.exists(f'/share/alertsmonitor/{channel}'):
+            f = open(f'/share/alertsmonitor/{channel}', 'r')
             message_id = f.read()
             f.close()
 
@@ -147,7 +144,7 @@ def main():
 
         try:
             response = fetch_data(url)
-            msg_posted += parse_data(response.text, chats_data[name], message_id, max_message_length, skip_key_words, delete_key_words)
+            msg_posted += parse_data(response.text, channel, message_id, config['max_message_length'], config['skip_key_words'], r"{}".format("|".join(config['delete_key_words'])))
             
             if msg_posted > 0:
                 logging.info(f"Sent {msg_posted} message(s)")

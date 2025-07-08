@@ -15,14 +15,18 @@ map:
   - share:rw
 options:
   max_message_length: 400
+  channels: []
   skip_key_words: []
-  delete_key_words: '@smolii_ukraine|@smolii_ukraije|@war_monitor|@kyiv_nebo|#обстановка|може бути гучно'
+  delete_key_words: []
   sync_interval: 6
 schema:
   max_message_length: int(100,600)?
+  channels:
+    - str
   skip_key_words: 
     - str
-  delete_key_words: str
+  delete_key_words: 
+    - str
   sync_interval: int(6,120)?
 startup: application
 init: false
