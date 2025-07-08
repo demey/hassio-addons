@@ -23,7 +23,7 @@ def fetch_data(url):
     response.raise_for_status()
     return response
 
-def parse_data(content, filename, message_id, max_message_length, skip_key_words, delete_key_words):
+def parse_data(content, channel, message_id, max_message_length, skip_key_words, delete_key_words):
     data = content.replace('\\','')
     data = BeautifulSoup(data[1:-1].replace('&nbsp;', ' ').replace('<br/>', ' ').replace('  ', ' '), features='html.parser')
 
@@ -56,13 +56,13 @@ def parse_data(content, filename, message_id, max_message_length, skip_key_words
             messages.remove(value)
             break
 
-    return post_data(channel_texts, message_ids, message_ages, filename, message_id, max_message_length, skip_key_words, delete_key_words)
+    return post_data(channel_texts, message_ids, message_ages, channel, message_id, max_message_length, skip_key_words, delete_key_words)
 
-def post_data(channel_texts, message_ids, message_ages, filename, message_id, max_message_length, skip_key_words, delete_key_words):
+def post_data(channel_texts, message_ids, message_ages, channel, message_id, max_message_length, skip_key_words, delete_key_words):
     counter = 0
 
     if len(message_ids) > 0:
-        with open(f'/share/alertsmonitor/{filename}', 'w') as f:
+        with open(f'/share/alertsmonitor/{channel}.txt', 'w') as f:
             f.write(max(message_ids))
         
         for i, key in enumerate(channel_texts):
@@ -128,36 +128,40 @@ def main():
         config = json.load(f)
         f.close()
     
-    msg_posted = 0
+    if len(config['channels']) > 0:
 
-    for channel in config['channels']:
-        message_id = 0
-        url = f'https://t.me/s/{channel}'
+        msg_posted = 0
 
-        if os.path.exists(f'/share/alertsmonitor/{channel}'):
-            f = open(f'/share/alertsmonitor/{channel}', 'r')
-            message_id = f.read()
-            f.close()
+        for channel in config['channels']:
+            message_id = 0
+            url = f'https://t.me/s/{channel}'
 
-        if int(message_id) > 0:
-            url = f'{url}?after={message_id}'
+            if os.path.exists(f'/share/alertsmonitor/{channel}.txt'):
+                f = open(f'/share/alertsmonitor/{channel}.txt', 'r')
+                message_id = f.read()
+                f.close()
 
-        try:
-            response = fetch_data(url)
-            msg_posted += parse_data(response.text, channel, message_id, config['max_message_length'], config['skip_key_words'], r"{}".format("|".join(config['delete_key_words'])))
+            if int(message_id) > 0:
+                url = f'{url}?after={message_id}'
+
+            try:
+                response = fetch_data(url)
+                msg_posted += parse_data(response.text, channel, message_id, config['max_message_length'], config['skip_key_words'], r"{}".format("|".join(config['delete_key_words'])))
             
-            if msg_posted > 0:
-                logging.info(f"Sent {msg_posted} message(s)")
+                if msg_posted > 0:
+                    logging.info(f"Sent {msg_posted} message(s)")
             
-            if name == 'war_monitor' and msg_posted >= 2:
-                break
+                if name == 'war_monitor' and msg_posted >= 2:
+                    break
 
-        except requests.HTTPError as e:
-            logging.error(f'HTTP error occurred: {e}')
-        except requests.RequestException as e:
-            logging.error(f'Request exception occurred: {e}')
-        except Exception as e:
-            logging.error(f'An unexpected error occurred: {e}')
+            except requests.HTTPError as e:
+                logging.error(f'HTTP error occurred: {e}')
+            except requests.RequestException as e:
+                logging.error(f'Request exception occurred: {e}')
+            except Exception as e:
+                logging.error(f'An unexpected error occurred: {e}')
+    else:
+        logging.error(f'Telegram channels not defined')
 
     os.remove('/var/run/monitor.pid')
 
