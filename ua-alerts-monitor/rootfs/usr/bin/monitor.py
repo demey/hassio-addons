@@ -151,7 +151,7 @@ def main():
                 if msg_posted > 0:
                     logging.info(f"Sent {msg_posted} message(s)")
             
-                if name == 'war_monitor' and msg_posted >= 2:
+                if channel == 'war_monitor' and msg_posted >= 2:
                     break
 
             except requests.HTTPError as e:
