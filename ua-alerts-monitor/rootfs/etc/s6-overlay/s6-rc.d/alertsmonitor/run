@@ -9,6 +9,14 @@ bashio::log.info 'Starting UA Alerts Monitor...'
 
 mkdir -p /share/alertsmonitor
 
+TOKEN=$(SUPERVISOR_TOKEN)
+
+curl \
+  -H "Authorization: Bearer ${TOKEN}" \
+  -H "Content-Type: application/json" \
+  -d '{"state": "0000", "attributes": {"message": "Тестове повідомлення", "friendly_name": "Радар повідомлення", "icon": "mdi:radar"}}' \
+  http://supervisor/core/api/states/sensor.radar_status
+
 chmod +x /usr/bin/alertsmonitor.sh
 
 exec /usr/bin/alertsmonitor.sh

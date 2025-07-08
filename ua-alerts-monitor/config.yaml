@@ -1,5 +1,5 @@
 ---
-version: "2025.07.08"
+version: "2025.07.08-1"
 name: UA Alerts Monitor
 slug: alertsmonitor
 description: UA Alerts Monitor
