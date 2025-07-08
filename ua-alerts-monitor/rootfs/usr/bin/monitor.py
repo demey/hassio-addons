@@ -148,9 +148,6 @@ def main():
                 response = fetch_data(url)
                 msg_posted += parse_data(response.text, channel, message_id, config['max_message_length'], config['skip_key_words'], r"{}".format("|".join(config['delete_key_words'])))
             
-                if msg_posted > 0:
-                    logging.info(f"Sent {msg_posted} message(s)")
-            
                 if channel == 'war_monitor' and msg_posted >= 2:
                     break
 
@@ -160,6 +157,10 @@ def main():
                 logging.error(f'Request exception occurred: {e}')
             except Exception as e:
                 logging.error(f'An unexpected error occurred: {e}')
+        
+        if msg_posted > 0:
+            logging.info(f"Sent {msg_posted} message(s)")
+
     else:
         logging.error(f'Telegram channels not defined')
 
