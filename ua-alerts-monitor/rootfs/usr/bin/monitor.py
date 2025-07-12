@@ -23,7 +23,7 @@ def fetch_data(url):
     response.raise_for_status()
     return response
 
-def parse_data(content, channel, message_id, max_message_length, skip_key_words, delete_key_words):
+def parse_data(content, channel, message_id, max_message_length, skip_key_words, delete_key_words, critical_key_words):
     data = content.replace('\\','')
     data = BeautifulSoup(data[1:-1].replace('&nbsp;', ' ').replace('<br/>', ' ').replace('  ', ' '), features='html.parser')
 
