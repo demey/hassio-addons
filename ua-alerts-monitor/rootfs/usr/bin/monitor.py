@@ -56,9 +56,9 @@ def parse_data(content, channel, message_id, max_message_length, skip_key_words,
             messages.remove(value)
             break
 
-    return post_data(channel_texts, message_ids, message_ages, channel, message_id, max_message_length, skip_key_words, delete_key_words)
+    return post_data(channel_texts, message_ids, message_ages, channel, message_id, max_message_length, skip_key_words, delete_key_words, critical_key_words)
 
-def post_data(channel_texts, message_ids, message_ages, channel, message_id, max_message_length, skip_key_words, delete_key_words):
+def post_data(channel_texts, message_ids, message_ages, channel, message_id, max_message_length, skip_key_words, delete_key_words, critical_key_words):
     counter = 0
 
     if len(message_ids) > 0:
@@ -67,7 +67,7 @@ def post_data(channel_texts, message_ids, message_ages, channel, message_id, max
         
         for i, key in enumerate(channel_texts):
             if int(key) > int(message_id) and int(message_ages[i]) <= 60 and len(channel_texts[key]) <= int(max_message_length):
-                output = [i for i in skip_key_words if(i in channel_texts[key])]
+                output = [i for i in skip_key_words if(i.lower() in channel_texts[key].lower())]
                 if bool(output) is False:
                     channel_texts[key] = re.sub(r"(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})", r"", channel_texts[key])
                     channel_texts[key] = re.sub(delete_key_words, r"", channel_texts[key])
@@ -106,11 +106,12 @@ def post_data(channel_texts, message_ids, message_ages, channel, message_id, max
                     sock.close()
 
                     if result == 0:
+                        critical = "true" if bool([i for i in critical_key_words if(i.lower() in channel_texts[key].lower())]) else "false"
                         logging.info("Updating Home Assistant sensor data")
                         TOKEN = "Bearer {}".format(os.environ['SUPERVISOR_TOKEN'])                           
                         url = "http://supervisor/core/api/states/sensor.radar_status"
                         headers = {"Authorization": TOKEN, "Content-Type": "application/json; charset=UTF-8"}
-                        data = {"state": key, "attributes": {"message": channel_texts[key], "friendly_name": "Радар повідомлення", "icon": "mdi:radar"}}
+                        data = {"state": key, "attributes": {"message": channel_texts[key], "critical": critical, "friendly_name": "Радар повідомлення", "icon": "mdi:radar"}}
                         r = requests.post(url, headers=headers, json=data)
                         logging.info(f"{key} - {message_ages[i]} - {channel_texts[key]}")
                         counter += 1
@@ -146,7 +147,7 @@ def main():
 
             try:
                 response = fetch_data(url)
-                msg_posted += parse_data(response.text, channel, message_id, config['max_message_length'], config['skip_key_words'], r"{}".format("|".join(config['delete_key_words'])))
+                msg_posted += parse_data(response.text, channel, message_id, config['max_message_length'], config['skip_key_words'], r"{}".format("|".join(config['delete_key_words'])), config['critical_key_words'])
             
                 if channel == 'war_monitor' and msg_posted >= 2:
                     break

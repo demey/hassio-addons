@@ -18,6 +18,7 @@ options:
   channels: []
   skip_key_words: []
   delete_key_words: []
+  critical_key_words: []
   sync_interval: 6
 schema:
   max_message_length: int(100,600)?
@@ -26,6 +27,8 @@ schema:
   skip_key_words: 
     - str
   delete_key_words: 
+    - str
+  critical_key_words: 
     - str
   sync_interval: int(6,120)?
 startup: application

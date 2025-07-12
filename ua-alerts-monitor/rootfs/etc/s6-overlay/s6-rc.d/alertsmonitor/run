@@ -12,7 +12,7 @@ mkdir -p /share/alertsmonitor
 curl -s \
   -H "Authorization: Bearer ${SUPERVISOR_TOKEN}" \
   -H "Content-Type: application/json" \
-  -d '{"state": "0000", "attributes": {"message": "Тестове повідомлення", "friendly_name": "Радар повідомлення", "icon": "mdi:radar"}}' \
+  -d '{"state": "0000", "attributes": {"message": "Тестове повідомлення", "critical": "false", "friendly_name": "Радар повідомлення", "icon": "mdi:radar"}}' \
   http://supervisor/core/api/states/sensor.radar_status > /dev/null
 
 chmod +x /usr/bin/alertsmonitor.sh

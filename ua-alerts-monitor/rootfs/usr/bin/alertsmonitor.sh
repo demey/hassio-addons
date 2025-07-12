@@ -14,7 +14,12 @@ main() {
   while true; do
 #    echo "processing..."
     if [ ! -f /var/run/monitor.pid ]; then
-      python /usr/bin/monitor.py
+      result="$(python /usr/bin/monitor.py)"
+
+      if [ ${#result} -gt 0 ]; then
+        bashio::log.info "$result"
+      fi
+      
     fi
     sleep "${sync_interval}"
   done
