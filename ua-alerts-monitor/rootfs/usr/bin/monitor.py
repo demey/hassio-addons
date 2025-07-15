@@ -113,7 +113,10 @@ def post_data(channel_texts, message_ids, message_ages, channel, message_id, max
                         headers = {"Authorization": TOKEN, "Content-Type": "application/json; charset=UTF-8"}
                         data = {"state": key, "attributes": {"message": channel_texts[key], "critical": critical, "friendly_name": "Радар повідомлення", "icon": "mdi:radar"}}
                         r = requests.post(url, headers=headers, json=data)
-                        logging.info(f"{key} - {message_ages[i]} - {channel_texts[key]}")
+                        if bool(critical):
+                            logging.warn(f"{key} - {message_ages[i]} - {channel_texts[key]}")
+                        else:
+                            logging.info(f"{key} - {message_ages[i]} - {channel_texts[key]}")
                         counter += 1
                         time.sleep(5)
 
