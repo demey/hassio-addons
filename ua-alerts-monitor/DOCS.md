@@ -32,7 +32,7 @@ A list of words that will indicate that this message is critical.
 The interval between requests to Telegram channels.
 
 
-## Using
+## Using:
 
 Launching the addon will create a sensor `sensor.radar_status` with following attributes:
 `state`, `message`, `critical`, `friendly_name`, `icon` which you can use in Home Assisstant automations as you wish.
