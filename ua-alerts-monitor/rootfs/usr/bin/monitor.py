@@ -72,6 +72,7 @@ def post_data(channel_texts, message_ids, message_ages, channel, message_id, max
                     channel_texts[key] = re.sub(r"(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})", r"", channel_texts[key])
                     channel_texts[key] = re.sub(delete_key_words, r"", channel_texts[key])
 
+                    channel_texts[key] = re.sub(r"+\/-", r"плюс мінус", channel_texts[key])
                     channel_texts[key] = re.sub(r"невст.", r"невстановлені", channel_texts[key])
                     channel_texts[key] = re.sub(r"обл:", r"область", channel_texts[key])
                     channel_texts[key] = re.sub(r"вдсх", r"водосховище", channel_texts[key])
