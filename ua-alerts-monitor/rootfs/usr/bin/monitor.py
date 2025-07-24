@@ -80,7 +80,6 @@ def post_data(channel_texts, message_ids, message_ages, channel, message_id, max
                     channel_texts[key] = re.sub(r"Чорнобильській ЗВ", r"Чорнобильській зоні", channel_texts[key], flags=re.I)
                     channel_texts[key] = re.sub(r"Чорнобильську ЗВ", r"Чорнобильську зону", channel_texts[key], flags=re.I)
 
-                    channel_texts[key] = re.sub(r"(\d+)\s?хв.?\s?", r"'\1' хвилин ", channel_texts[key])
                     channel_texts[key] = re.sub(r"1\sракет", r"одна ракет", channel_texts[key])
                     channel_texts[key] = re.sub(r"2\sракет", r"дві ракет", channel_texts[key])
                     channel_texts[key] = re.sub(r"1х\sракет", r"одна ракет", channel_texts[key])
@@ -100,6 +99,8 @@ def post_data(channel_texts, message_ids, message_ages, channel, message_id, max
                     channel_texts[key] = re.sub(r"3\s?шт.?\s?", r"три штуки ", channel_texts[key])
                     channel_texts[key] = re.sub(r"4\s?шт.?\s?", r"чотири штуки ", channel_texts[key])
                     channel_texts[key] = re.sub(r"(\d+)\s?шт.?\s?", r"'\1' штук ", channel_texts[key])
+
+                    channel_texts[key] = re.sub(r"(\d+)\s?хв.?\s?", r"'\1' хвилин ", channel_texts[key])
 
                     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                     result = sock.connect_ex(('supervisor',80))
