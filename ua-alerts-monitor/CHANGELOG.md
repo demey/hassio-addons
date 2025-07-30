@@ -1,6 +1,9 @@
 
 # Changelog
 
+## [2025.07.30]
+* Fixed bug with the wrong number of extracted messages
+
 ## [2025.07.16]
 * Critical messages will be pushed in the log as WARNING records
 
