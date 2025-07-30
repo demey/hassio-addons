@@ -29,6 +29,9 @@ def parse_data(content, channel, message_id, max_message_length, skip_key_words,
 
     messages = []
     for message_text in data.find_all('div', class_ = 'tgme_widget_message_text js-message_text'):
+        if str(message_text).count('tgme_widget_message_text js-message_text') == 2:
+            continue
+
         soup = BeautifulSoup(str(message_text), 'html.parser')
         for emoji in soup.find_all('i', class_ = 'emoji'): 
             emoji.decompose()
@@ -46,6 +49,12 @@ def parse_data(content, channel, message_id, max_message_length, skip_key_words,
         href = BeautifulSoup(str(link), 'html.parser', multi_valued_attributes=None)
         dt_message = (datetime.strptime(href.time['datetime'], '%Y-%m-%dT%H:%M:%S%z'))
         delta = dt_utcnow - dt_message
+
+        if 'day' in str(delta):
+            message_ages.append(delta.seconds + 86400)
+        else:
+            message_ages.append(delta.seconds)
+
         message_ages.append(delta.seconds)
         message_ids.append(href.a['href'].split('/')[-1])
 
