@@ -19,7 +19,7 @@ def retry_if_request_exception(exception):
 @retry(stop_max_attempt_number=2, wait_fixed=5000, retry_on_exception=retry_if_request_exception)
 def fetch_data(url):
     headers = {"X-Requested-With": "XMLHttpRequest"}
-    response = requests.get(url, headers=headers, timeout=(4, 10))
+    response = requests.get(url, headers=headers, timeout=(5, 10))
     response.raise_for_status()
     return response
 
