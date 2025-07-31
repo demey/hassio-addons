@@ -16,7 +16,7 @@ def retry_if_request_exception(exception):
     """Return True if we should retry (in this case when it's an RequestException), False otherwise"""
     return isinstance(exception, requests.RequestException)
 
-@retry(stop_max_attempt_number=3, wait_fixed=5000, retry_on_exception=retry_if_request_exception)
+@retry(stop_max_attempt_number=2, wait_fixed=5000, retry_on_exception=retry_if_request_exception)
 def fetch_data(url):
     headers = {"X-Requested-With": "XMLHttpRequest"}
     response = requests.get(url, headers=headers, timeout=(4, 10))
