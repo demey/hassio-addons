@@ -1,6 +1,9 @@
 
 # Changelog
 
+## [2025.08.08]
+* Fixed regexp 'хв' -> 'хвилин'
+
 ## [2025.07.30]
 * Fixed bug with the wrong number of extracted messages
 * Fixed the method of calculating the age of the message (if age more than 24h)
