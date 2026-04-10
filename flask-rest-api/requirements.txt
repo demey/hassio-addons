@@ -4,3 +4,4 @@ python-aqi
 requests
 pytz
 geopy
+beautifulsoup4
