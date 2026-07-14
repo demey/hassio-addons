@@ -149,7 +149,7 @@ def main():
 
         for channel in config['channels']:
             message_id = 0
-            url = f'https://t.me/s/{channel}'
+            url = f'https://telegram.me/s/{channel}'
 
             if os.path.exists(f'/share/alertsmonitor/{channel}.txt'):
                 f = open(f'/share/alertsmonitor/{channel}.txt', 'r')
