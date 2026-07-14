@@ -1,6 +1,9 @@
 
 # Changelog
 
+## [2026.07.14]
+* Fixed 't.me' -> 'telegram.me'
+
 ## [2025.08.08]
 * Fixed regexp 'хв' -> 'хвилин'
 
