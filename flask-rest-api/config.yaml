@@ -17,4 +17,3 @@ map:
 ports:
   5001/tcp: 5001
 startup: system
-init: false
