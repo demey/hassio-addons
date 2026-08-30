@@ -5,3 +5,4 @@ requests
 pytz
 geopy
 beautifulsoup4
+alerts_in_ua
