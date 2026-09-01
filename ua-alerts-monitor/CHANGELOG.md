@@ -1,6 +1,9 @@
 
 # Changelog
 
+## [2026.09.01]
+* Added channel name to log message
+
 ## [2026.07.14]
 * Fixed 't.me' -> 'telegram.me'
 
