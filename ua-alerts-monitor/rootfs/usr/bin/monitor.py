@@ -1,3 +1,13 @@
+import os
+import re
+import json
+import logging
+from datetime import datetime, timezone
+import requests
+from bs4 import BeautifulSoup
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
 def process_channel(session, channel, config, patterns, skip_sending=False):
     delete_pattern, url_pattern, tts_replacements = patterns
     
