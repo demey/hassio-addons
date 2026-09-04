@@ -1,28 +1,16 @@
 #!/usr/bin/with-contenv bashio
 # ==============================================================================
-# Home Assistant Add-on: Proton Drive Folder Sync 
+# Home Assistant Add-on: UA Alerts Monitor
 # ==============================================================================
 
 main() {
-
   declare sync_interval
-
   sync_interval=$(bashio::config 'sync_interval')
 
-  rm -f /var/run/monitor.pid
-
   while true; do
-#    echo "processing..."
-    if [ ! -f /var/run/monitor.pid ]; then
-      result="$(python /usr/bin/monitor.py)"
-
-      if [ ${#result} -gt 0 ]; then
-        bashio::log.info "$result"
-      fi
-      
-    fi
+    python3 /usr/bin/monitor.py
     sleep "${sync_interval}"
   done
 }
-main "$@"
 
+main "$@"
