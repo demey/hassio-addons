@@ -1,63 +1,4 @@
-import os
-import re
-import json
-import logging
-from datetime import datetime, timezone
-import requests
-from bs4 import BeautifulSoup
-
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-
-def compile_regex_patterns(config):
-    """Предкомпіляція регулярних виразів для прискорення обробки тексту."""
-    delete_words = config.get('delete_key_words', [])
-    delete_pattern = re.compile("|".join(map(re.escape, delete_words)), re.IGNORECASE) if delete_words else None
-
-    url_pattern = re.compile(r"https?://\S+|www\.\S+")
-
-    tts_replacements = [
-        (re.compile(r"(\d+)\s?хв(\s|\.)?", re.I), r"'\1' хвилин "),
-        (re.compile(r"\+/-"), "плюс мінус"),
-        (re.compile(r"невст\.", re.I), "невстановлені"),
-        (re.compile(r"обл:", re.I), "область"),
-        (re.compile(r"вдсх", re.I), "водосховище"),
-        (re.compile(r"БПЛА", re.I), "БПЛ-А"),
-        (re.compile(r"Чорнобильській ЗВ", re.I), "Чорнобильській зоні"),
-        (re.compile(r"Чорнобильську ЗВ", re.I), "Чорнобильську зону"),
-        (re.compile(r"1\sракет", re.I), "одна ракет"),
-        (re.compile(r"2\sракет", re.I), "дві ракет"),
-        (re.compile(r"1х\sракет", re.I), "одна ракет"),
-        (re.compile(r"2х\sракет", re.I), "дві ракет"),
-        (re.compile(r"1х\sавіаційн", re.I), "одна авіаційн"),
-        (re.compile(r"2х\sавіаційн", re.I), "дві авіаційн"),
-        (re.compile(r"1\sгрупа", re.I), "одна група"),
-        (re.compile(r"2\sгрупи", re.I), "дві групи"),
-        (re.compile(r"(\d+)[xх]", re.I), r"'\1'"),
-        (re.compile(r"(\d+)\sгруп", re.I), r"'\1' груп"),
-        (re.compile(r"1\s?шт\.?\s?", re.I), "одна штука "),
-        (re.compile(r"2\s?шт\.?\s?", re.I), "дві штуки "),
-        (re.compile(r"3\s?шт\.?\s?", re.I), "три штуки "),
-        (re.compile(r"4\s?шт\.?\s?", re.I), "чотири штуки "),
-        (re.compile(r"(\d+)\s?шт\.?\s?", re.I), r"'\1' штук "),
-        (re.compile(r"(\d+)\s"), r"'\1' "),
-        (re.compile(r"(\d+)-"), r"'\1'-"),
-    ]
-
-    return delete_pattern, url_pattern, tts_replacements
-
-def clean_text_for_tts(text, delete_pattern, url_pattern, tts_replacements):
-    """Очищення та підготовка тексту для приємного звукового відтворення."""
-    text = url_pattern.sub("", text)
-    
-    if delete_pattern:
-        text = delete_pattern.sub("", text)
-
-    for pattern, replacement in tts_replacements:
-        text = pattern.sub(replacement, text)
-
-    return text.strip()
-
-def process_channel(session, channel, config, patterns):
+def process_channel(session, channel, config, patterns, skip_sending=False):
     delete_pattern, url_pattern, tts_replacements = patterns
     
     file_path = f'/share/alertsmonitor/{channel}.txt'
@@ -82,7 +23,6 @@ def process_channel(session, channel, config, patterns):
         logging.error(f"Error fetching {channel}: {e}")
         return 0
 
-    # Декодуємо JSON-рядок від Telegram у чистий HTML
     try:
         html_content = response.json()
     except (json.JSONDecodeError, ValueError):
@@ -108,13 +48,18 @@ def process_channel(session, channel, config, patterns):
         except (ValueError, KeyError, IndexError):
             continue
 
+        # Фіксуємо максимальний ID у пачці незалежно від того, чи будемо відправляти
         if msg_id > max_id_in_batch:
             max_id_in_batch = msg_id
 
         if msg_id <= last_message_id:
             continue
 
-        # Перевірка віку повідомлення
+        # Якщо ліміт перевищено — пропускаємо аналіз та відправку тексту
+        if skip_sending:
+            continue
+
+        # Перевірка віку
         try:
             time_str = date_link.find('time')['datetime']
             dt_message = datetime.fromisoformat(time_str)
@@ -125,7 +70,7 @@ def process_channel(session, channel, config, patterns):
         if max_age_seconds > 0 and age_seconds > max_age_seconds:
             continue
 
-        # Видалення емодзі з DOM-дерева поста
+        # Очищення та підготовка тексту
         for emoji in text_div.find_all(['i', 'tg-emoji'], class_='emoji'):
             emoji.decompose()
 
@@ -134,19 +79,16 @@ def process_channel(session, channel, config, patterns):
         if len(raw_text) > config.get('max_message_length', 400):
             continue
 
-        # Перевірка слів-пропусків (skip_key_words)
         if any(skip.lower() in raw_text.lower() for skip in config.get('skip_key_words', [])):
             continue
 
-        # Нормалізація тексту для TTS
         processed_text = clean_text_for_tts(raw_text, delete_pattern, url_pattern, tts_replacements)
         if not processed_text:
             continue
 
-        # Визначення критичності
         is_critical = any(crit.lower() in processed_text.lower() for crit in config.get('critical_key_words', []))
 
-        # Відправка в Home Assistant Sensor API
+        # Відправка в HA
         supervisor_token = os.environ.get('SUPERVISOR_TOKEN', '')
         ha_url = "http://supervisor/core/api/states/sensor.radar_status"
         #ha_url = "http://supervisor/core/api/events/ua_alerts_monitor_new_message"
@@ -170,7 +112,7 @@ def process_channel(session, channel, config, patterns):
         #    "channel": channel,
         #    "msg_id": key
         #}
-
+        
         try:
             res = session.post(ha_url, headers=headers, json=payload, timeout=5)
             res.raise_for_status()
@@ -182,7 +124,7 @@ def process_channel(session, channel, config, patterns):
         except requests.RequestException as e:
             logging.error(f"Failed to update HA state: {e}")
 
-    # Оновлення останнього ID у файлі
+    # Файл стану оновлюється ЗАВЖДИ (навіть якщо skip_sending=True)
     if max_id_in_batch > last_message_id:
         try:
             with open(file_path, 'w') as f:
@@ -194,23 +136,47 @@ def process_channel(session, channel, config, patterns):
 
 def main():
     session = requests.Session()
+    logging.info("Starting UA Alerts Monitor service...")
 
-    with open('/data/options.json', 'r') as f:
-        config = json.load(f)
-
-    patterns = compile_regex_patterns(config)
-    channels = config.get('channels', [])
-
-    if not channels:
-        logging.error("No Telegram channels defined in configuration.")
+    try:
+        with open('/data/options.json', 'r') as f:
+            config = json.load(f)
+    except Exception as e:
+        logging.error(f"Failed to read configuration: {e}")
         return
 
-    msg_posted = 0
-    for channel in channels:
-        msg_posted += process_channel(session, channel, config, patterns)
+    raw_channels = config.get('channels', [])
+    sync_interval = config.get('sync_interval', 5)
 
-    if msg_posted > 0:
-        logging.info(f"Successfully processed and sent {msg_posted} message(s).")
+    if not raw_channels:
+        logging.error("No Telegram channels defined in configuration. Stopping service.")
+        return
+
+    # Примусово переміщуємо war_monitor у кінець списку
+    channels = sorted(raw_channels, key=lambda x: x == 'war_monitor')
+    patterns = compile_regex_patterns(config)
+
+    while True:
+        try:
+            total_posted = 0
+
+            for channel in channels:
+                # Перевірка: якщо це war_monitor і з попередніх каналів вже є >= 2 повідомлень
+                should_skip = (channel == 'war_monitor' and total_posted >= 2)
+
+                if should_skip:
+                    logging.info(f"Limit reached ({total_posted} msgs). Updating ID for {channel} without sending alerts.")
+
+                count = process_channel(session, channel, config, patterns, skip_sending=should_skip)
+                total_posted += count
+
+            if total_posted > 0:
+                logging.info(f"Cycle completed. Total messages sent: {total_posted}.")
+
+        except Exception as e:
+            logging.error(f"Unexpected error in main loop: {e}")
+
+        time.sleep(sync_interval)
 
 if __name__ == '__main__':
     main()
