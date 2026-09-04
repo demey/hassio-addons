@@ -1,6 +1,9 @@
 
 # Changelog
 
+## [2026.09.04]
+* Full code refactoring for improved readability and functionality
+
 ## [2026.09.01]
 * Added channel name to log message
 
