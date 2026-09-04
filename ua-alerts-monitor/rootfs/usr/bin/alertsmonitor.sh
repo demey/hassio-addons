@@ -9,7 +9,7 @@ main() {
 
   while true; do
     python3 /usr/bin/monitor.py
-    sleep "${sync_interval}"
+#    sleep "${sync_interval}"
   done
 }
 
