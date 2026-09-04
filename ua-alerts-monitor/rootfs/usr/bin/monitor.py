@@ -96,7 +96,7 @@ def process_channel(session, channel, config, patterns, skip_sending=False):
     posted_count = 0
     max_id_in_batch = last_message_id
     dt_utcnow = datetime.now(timezone.utc)
-    max_age_seconds = config.get('max_message_age_seconds', 300)
+    max_age_seconds = config.get('max_message_age_seconds', 180)
 
     for post in posts:
         date_link = post.find('a', class_='tgme_widget_message_date')
