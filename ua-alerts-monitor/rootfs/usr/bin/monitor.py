@@ -8,6 +8,55 @@ from bs4 import BeautifulSoup
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
+def compile_regex_patterns(config):
+    """Предкомпіляція регулярних виразів для прискорення обробки тексту."""
+    delete_words = config.get('delete_key_words', [])
+    delete_pattern = re.compile("|".join(map(re.escape, delete_words)), re.IGNORECASE) if delete_words else None
+
+    url_pattern = re.compile(r"https?://\S+|www\.\S+")
+
+    tts_replacements = [
+        (re.compile(r"(\d+)\s?хв(\s|\.)?", re.I), r"'\1' хвилин "),
+        (re.compile(r"\+/-"), "плюс мінус"),
+        (re.compile(r"невст\.", re.I), "невстановлені"),
+        (re.compile(r"обл:", re.I), "область"),
+        (re.compile(r"вдсх", re.I), "водосховище"),
+        (re.compile(r"БПЛА", re.I), "БПЛ-А"),
+        (re.compile(r"Чорнобильській ЗВ", re.I), "Чорнобильській зоні"),
+        (re.compile(r"Чорнобильську ЗВ", re.I), "Чорнобильську зону"),
+        (re.compile(r"1\sракет", re.I), "одна ракет"),
+        (re.compile(r"2\sракет", re.I), "дві ракет"),
+        (re.compile(r"1х\sракет", re.I), "одна ракет"),
+        (re.compile(r"2х\sракет", re.I), "дві ракет"),
+        (re.compile(r"1х\sавіаційн", re.I), "одна авіаційн"),
+        (re.compile(r"2х\sавіаційн", re.I), "дві авіаційн"),
+        (re.compile(r"1\sгрупа", re.I), "одна група"),
+        (re.compile(r"2\sгрупи", re.I), "дві групи"),
+        (re.compile(r"(\d+)[xх]", re.I), r"'\1'"),
+        (re.compile(r"(\d+)\sгруп", re.I), r"'\1' груп"),
+        (re.compile(r"1\s?шт\.?\s?", re.I), "одна штука "),
+        (re.compile(r"2\s?шт\.?\s?", re.I), "дві штуки "),
+        (re.compile(r"3\s?шт\.?\s?", re.I), "три штуки "),
+        (re.compile(r"4\s?шт\.?\s?", re.I), "чотири штуки "),
+        (re.compile(r"(\d+)\s?шт\.?\s?", re.I), r"'\1' штук "),
+        (re.compile(r"(\d+)\s"), r"'\1' "),
+        (re.compile(r"(\d+)-"), r"'\1'-"),
+    ]
+
+    return delete_pattern, url_pattern, tts_replacements
+
+def clean_text_for_tts(text, delete_pattern, url_pattern, tts_replacements):
+    """Очищення та підготовка тексту для приємного звукового відтворення."""
+    text = url_pattern.sub("", text)
+    
+    if delete_pattern:
+        text = delete_pattern.sub("", text)
+
+    for pattern, replacement in tts_replacements:
+        text = pattern.sub(replacement, text)
+
+    return text.strip()
+
 def process_channel(session, channel, config, patterns, skip_sending=False):
     delete_pattern, url_pattern, tts_replacements = patterns
     
