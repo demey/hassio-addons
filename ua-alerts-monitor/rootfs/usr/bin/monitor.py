@@ -46,6 +46,7 @@ def compile_regex_patterns(config):
 
     return delete_pattern, url_pattern, tts_replacements
 
+
 def clean_text_for_tts(text, delete_pattern, url_pattern, tts_replacements):
     """Очищення та підготовка тексту для приємного звукового відтворення."""
     text = url_pattern.sub("", text)
@@ -57,6 +58,7 @@ def clean_text_for_tts(text, delete_pattern, url_pattern, tts_replacements):
         text = pattern.sub(replacement, text)
 
     return text.strip()
+
 
 def process_channel(session, channel, config, patterns, skip_sending=False):
     delete_pattern, url_pattern, tts_replacements = patterns
@@ -193,6 +195,7 @@ def process_channel(session, channel, config, patterns, skip_sending=False):
             logging.error(f"Failed to save state for {channel}: {e}")
 
     return posted_count
+
 
 def main():
     session = requests.Session()
