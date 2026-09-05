@@ -14,6 +14,7 @@ homeassistant_api: true
 map:
   - share:rw
 options:
+  debug: false
   max_message_length: 400
   channels: []
   skip_key_words: []
@@ -21,6 +22,7 @@ options:
   critical_key_words: []
   sync_interval: 6
 schema:
+  debug: bool?
   max_message_length: int(100,600)?
   channels:
     - str
