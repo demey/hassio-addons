@@ -1,9 +1,6 @@
 
 # Changelog
 
-## [2026.09.05.01]
-* Bugfix
-
 ## [2026.09.05]
 * Migration from sensor to events
 
