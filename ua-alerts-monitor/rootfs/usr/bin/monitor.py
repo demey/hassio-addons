@@ -144,6 +144,10 @@ def process_channel(session, channel, config, patterns, skip_sending=False):
         if any(skip.lower() in raw_text.lower() for skip in config.get('skip_key_words', [])):
             continue
 
+        debug_mode = config.get('debug', False)
+        if debug_mode:
+            raw_text = "Тестове повідомлення"
+
         processed_text = clean_text_for_tts(raw_text, delete_pattern, url_pattern, tts_replacements)
         if not processed_text:
             continue
