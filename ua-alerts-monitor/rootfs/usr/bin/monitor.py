@@ -199,7 +199,7 @@ def process_channel(session, channel, config, patterns, skip_sending=False):
 
 def main():
     session = requests.Session()
-    logging.info("Starting UA Alerts Monitor service...")
+    logging.info("Starting UA Alerts Monitor service... (sensor version)")
 
     try:
         with open('/data/options.json', 'r') as f:
