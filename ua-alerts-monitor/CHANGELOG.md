@@ -1,6 +1,9 @@
 
 # Changelog
 
+## [2026.09.05]
+* Migration from sensor to events
+
 ## [2026.09.04]
 * Full code refactoring for improved readability and functionality
 
