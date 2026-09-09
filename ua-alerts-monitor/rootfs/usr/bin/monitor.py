@@ -17,7 +17,7 @@ def compile_regex_patterns(config):
     url_pattern = re.compile(r"https?://\S+|www\.\S+")
 
     tts_replacements = [
-        (re.compile(r"(\d+)\s?хв(\s|\.)?", re.I), r"'\1' хвилин "),
+        (re.compile(r"(\d+)\s?хв\b\.?\s?", re.I), r"'\1' хвилин "),
         (re.compile(r"\+/-"), "плюс мінус"),
         (re.compile(r"невст\.", re.I), "невстановлені"),
         (re.compile(r"обл:", re.I), "область"),
