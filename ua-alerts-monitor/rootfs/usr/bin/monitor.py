@@ -17,6 +17,9 @@ def compile_regex_patterns(config):
     url_pattern = re.compile(r"https?://\S+|www\.\S+")
 
     tts_replacements = [
+        # 1. Дати та час
+        (re.compile(r"(?<!['\d])(\d{1,2}:\d{2}|\d{1,2}\.\d{1,2}\.\d{2,4})(?!['\d])"), r"'\1'"),
+        # 2. Хвилини та абревіатури
         (re.compile(r"(\d+)\s?хв\b\.?\s?", re.I), r"'\1' хвилин "),
         (re.compile(r"\+/-"), "плюс мінус"),
         (re.compile(r"невст\.", re.I), "невстановлені"),
@@ -25,23 +28,27 @@ def compile_regex_patterns(config):
         (re.compile(r"БПЛА", re.I), "БПЛ-А"),
         (re.compile(r"Чорнобильській ЗВ", re.I), "Чорнобильській зоні"),
         (re.compile(r"Чорнобильську ЗВ", re.I), "Чорнобильську зону"),
-        (re.compile(r"1\sракет", re.I), "одна ракет"),
-        (re.compile(r"2\sракет", re.I), "дві ракет"),
-        (re.compile(r"1х\sракет", re.I), "одна ракет"),
-        (re.compile(r"2х\sракет", re.I), "дві ракет"),
-        (re.compile(r"1х\sавіаційн", re.I), "одна авіаційн"),
-        (re.compile(r"2х\sавіаційн", re.I), "дві авіаційн"),
-        (re.compile(r"1\sгрупа", re.I), "одна група"),
-        (re.compile(r"2\sгрупи", re.I), "дві групи"),
-        (re.compile(r"(\d+)[xх]", re.I), r"'\1'"),
-        (re.compile(r"(\d+)\sгруп", re.I), r"'\1' груп"),
+        # 3. Ракети та авіація (враховано латиницю/кирилицю x/х)
+        (re.compile(r"1\s?ракет", re.I), "одна ракет"),
+        (re.compile(r"2\s?ракет", re.I), "дві ракет"),
+        (re.compile(r"1[xх]\s?ракет", re.I), "одна ракет"),
+        (re.compile(r"2[xх]\s?ракет", re.I), "дві ракет"),
+        (re.compile(r"1[xх]\s?авіаційн", re.I), "одна авіаційн"),
+        (re.compile(r"2[xх]\s?авіаційн", re.I), "дві авіаційн"),
+        # 4. Групи
+        (re.compile(r"1\s?група\b", re.I), "одна група"),
+        (re.compile(r"2\s?групи\b", re.I), "дві групи"),
+        (re.compile(r"(\d+)\s?груп[аи]?\b", re.I), r"'\1' груп"),
+        # 5. Множники та штуки
         (re.compile(r"1\s?шт\b\.?\s?", re.I), "одна штука "),
         (re.compile(r"2\s?шт\b\.?\s?", re.I), "дві штуки "),
         (re.compile(r"3\s?шт\b\.?\s?", re.I), "три штуки "),
         (re.compile(r"4\s?шт\b\.?\s?", re.I), "чотири штуки "),
         (re.compile(r"(\d+)\s?шт\b\.?\s?", re.I), r"'\1' штук "),
-        (re.compile(r"(\d+)\s"), r"'\1' "),
-        (re.compile(r"(\d+)-"), r"'\1'-"),
+        (re.compile(r"(\d+)[xх]\b", re.I), r"'\1'"),
+        # 6. Окремі числа та діапазони (виконуються в останню чергу)
+        (re.compile(r"(?<!['\d])(\d+)-(?=['\d]|\d)", re.I), r"'\1'-"),
+        (re.compile(r"(?<!['\d\w])(\d+)(?!['\d\w])", re.I), r"'\1'"),
     ]
 
     return delete_pattern, url_pattern, tts_replacements
