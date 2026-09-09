@@ -1,6 +1,10 @@
 
 # Changelog
 
+## [2026.09.08]
+* Disable curl command in alertsmonitor run script
+* Refactor regex patterns for quantity matching
+
 ## [2026.09.05]
 * Migration from sensor to events
 
