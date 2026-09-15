@@ -111,7 +111,8 @@ def process_channel(session, channel, config, patterns, skip_sending=False):
 
     for post in posts:
         date_link = post.find('a', class_='tgme_widget_message_date')
-        text_div = post.find('div', class_='tgme_widget_message_text')
+        #text_div = post.find('div', class_='tgme_widget_message_text')
+        text_div = post.find('div', class_='js-message_text')
 
         if not date_link or not text_div:
             continue
