@@ -30,6 +30,6 @@ schema:
     - str
   critical_key_words: 
     - str
-  sync_interval: int(6,120)?
+  sync_interval: int(4,120)?
 startup: application
 init: false
