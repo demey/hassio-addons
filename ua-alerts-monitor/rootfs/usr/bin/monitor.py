@@ -182,7 +182,8 @@ def process_channel(session, channel, config, patterns, skip_sending=False):
         payload = {
             "message": processed_text,
             "critical": "true" if is_critical else "false",
-            "msg_id": str(msg_id)
+            "msg_id": str(msg_id),
+            "channel": channel
         }
         
         try:
