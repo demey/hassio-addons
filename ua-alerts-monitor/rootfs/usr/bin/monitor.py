@@ -166,21 +166,12 @@ def process_channel(session, channel, config, patterns, skip_sending=False):
 
         # Відправка в HA
         supervisor_token = os.environ.get('SUPERVISOR_TOKEN', '')
-        #ha_url = "http://supervisor/core/api/states/sensor.radar_status"
         ha_url = "http://supervisor/core/api/events/ua_alerts_monitor_new_message"
         headers = {
             "Authorization": f"Bearer {supervisor_token}",
             "Content-Type": "application/json; charset=UTF-8"
         }
-        #payload = {
-        #    "state": str(msg_id),
-        #    "attributes": {
-        #        "message": processed_text,
-        #        "critical": "true" if is_critical else "false",
-        #        "friendly_name": "Радар повідомлення",
-        #        "icon": "mdi:radar"
-        #    }
-        #}
+
         payload = {
             "message": processed_text,
             "critical": "true" if is_critical else "false",
@@ -238,8 +229,8 @@ def main():
             total_posted = 0
 
             for channel in channels:
-                # Перевірка: якщо це war_monitor і з попередніх каналів вже є >= 2 повідомлень
-                should_skip = (channel == 'war_monitor' and total_posted >= 2)
+                # Перевірка: якщо це war_monitor або kyiv_nebo та з попередніх каналів вже є >= 2 повідомлень
+                should_skip = (channel in ['kyiv_nebo', war_monitor'] and total_posted >= 2)
 
                 if should_skip:
                     logging.info(f"Limit reached ({total_posted} msgs). Updating ID for {channel} without sending alerts.")
