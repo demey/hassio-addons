@@ -51,8 +51,10 @@ def compile_regex_patterns(config):
         (re.compile(r"(\d+)\s?шт\b\.?\s?", re.I), r"'\1' штук "),
         (re.compile(r"(\d+)[xх]\b", re.I), r"'\1'"),
         # 6. Окремі числа та діапазони (виконуються в останню чергу)
+        #(re.compile(r"(?<!['\d])(\d+)-(?=['\d]|\d)", re.I), r"'\1'-"),
+        #(re.compile(r"(?<!['\d\w])(\d+)(?!['\d\w])", re.I), r"'\1'"),
         (re.compile(r"(?<!['\d])(\d+)-(?=['\d]|\d)", re.I), r"'\1'-"),
-        (re.compile(r"(?<!['\d\w])(\d+)(?!['\d\w])", re.I), r"'\1'"),
+        (re.compile(r"(?<!['\d\w])(?<!\d[.,])(\d+)(?!(?:[.,]\d+)?\s?(?:км|km)\b)(?!['\d\w])", re.I), r"'\1'"),
     ]
 
     return delete_pattern, url_pattern, tts_replacements
