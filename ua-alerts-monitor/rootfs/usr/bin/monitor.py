@@ -12,15 +12,24 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 def compile_regex_patterns(config):
     """Предкомпіляція регулярних виразів для прискорення обробки тексту."""
     delete_words = config.get('delete_key_words', [])
-    delete_pattern = re.compile("|".join(map(re.escape, delete_words)), re.IGNORECASE) if delete_words else None
+    delete_pattern = (
+        re.compile("|".join(map(re.escape, delete_words)), re.IGNORECASE)
+        if delete_words
+        else None
+    )
 
     url_pattern = re.compile(r"https?://\S+|www\.\S+")
 
-    import re
+    # Рядок "import re" звідси вилучено!
 
     tts_replacements = [
         # 1. Дати та час
-        (re.compile(r"(?<!['\d])(\d{1,2}:\d{2}|\d{1,2}\.\d{1,2}\.\d{2,4})(?!['\d])"),r"'\1'"),
+        (
+            re.compile(
+                r"(?<!['\d])(\d{1,2}:\d{2}|\d{1,2}\.\d{1,2}\.\d{2,4})(?!['\d])"
+            ),
+            r"'\1'",
+        ),
         # 2. Заміна крапки на кому в дробових числах ($6.51 -> $6,51; 3.5 -> 3,5)
         (re.compile(r"(?<!['\d\.])(\d+)\.(\d+)(?!['\d\.])"), r"\1,\2"),
         # 3. Хвилини та абревіатури
