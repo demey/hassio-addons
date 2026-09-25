@@ -230,7 +230,7 @@ def main():
 
             for channel in channels:
                 # Перевірка: якщо це war_monitor або kyiv_nebo та з попередніх каналів вже є >= 2 повідомлень
-                should_skip = (channel in ['kyiv_nebo', war_monitor'] and total_posted >= 2)
+                should_skip = (channel in ['kyiv_nebo', 'war_monitor'] and total_posted >= 2)
 
                 if should_skip:
                     logging.info(f"Limit reached ({total_posted} msgs). Updating ID for {channel} without sending alerts.")
