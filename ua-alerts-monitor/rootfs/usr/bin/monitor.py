@@ -52,6 +52,10 @@ def compile_regex_patterns(config):
         (re.compile(r"2\s?групи\b", re.I), "дві групи"),
         (re.compile(r"(\d+)\s?груп[аи]?\b", re.I), r"'\1' груп"),
         # 6. Множники та штуки
+        (re.compile(r"1-ше\b", re.I), "перше"),
+        (re.compile(r"2-ге\b", re.I), "друге"),
+        (re.compile(r"3-те\b", re.I), "третє"),
+        (re.compile(r"4-те\b", re.I), "четвертє"),
         (re.compile(r"1\s?шт\b\.?\s?", re.I), "одна штука "),
         (re.compile(r"2\s?шт\b\.?\s?", re.I), "дві штуки "),
         (re.compile(r"3\s?шт\b\.?\s?", re.I), "три штуки "),
