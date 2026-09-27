@@ -30,6 +30,7 @@ def compile_regex_patterns(config):
         # 3. Хвилини, відстані та абревіатури
         (re.compile(r"(?<!,\s)(?<!,)\b(\d+(?:,\d+)?)\s?км\b", re.I), r", \1 км"),
         (re.compile(r"(\d+)\s?хв\b\.?\s?", re.I), r"'\1' хвилин "),
+        (re.compile(r"(\d+)\s?шв\b\.?", re.I), r"\1 швидкість"),
         (re.compile(r"\+/-"), "плюс мінус"),
         (re.compile(r"невст\.", re.I), "невстановлені"),
         (re.compile(r"обл:", re.I), "область"),
@@ -37,6 +38,7 @@ def compile_regex_patterns(config):
         (re.compile(r"БПЛА", re.I), "БПЛ-А"),
         (re.compile(r"АЗС", re.I), "А-З-С"),
         (re.compile(r"ТРЦ", re.I), "Т-Р-Ц"),
+        (re.compile(r"НСК", re.I), "НС-К"),
         (re.compile(r"Чорнобильській ЗВ", re.I), "Чорнобильській зоні"),
         (re.compile(r"Чорнобильської ЗВ", re.I), "Чорнобильської зони"),
         (re.compile(r"Чорнобильську ЗВ", re.I), "Чорнобильську зону"),
