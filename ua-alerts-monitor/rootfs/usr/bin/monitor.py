@@ -20,15 +20,13 @@ def compile_regex_patterns(config):
 
     url_pattern = re.compile(r"https?://\S+|www\.\S+")
 
-    # Рядок "import re" звідси вилучено!
-
     tts_replacements = [
         # 1. Дати та час
         (re.compile(r"(?<!['\d])(\d{1,2}:\d{2}|\d{1,2}\.\d{1,2}\.\d{2,4})(?!['\d])"), r"'\1'"),
         # 2. Заміна крапки на кому в дробових числах ($6.51 -> $6,51; 3.5 -> 3,5)
         (re.compile(r"(?<!['\d\.])(\d+)\.(\d+)(?!['\d\.])"), r"\1,\2"),
         # 3. Хвилини, відстані та абревіатури
-        (re.compile(r"(?<!,\s)(?<!,)\b(\d+(?:,\d+)?)\s?км\b", re.I), r", \1 км"),
+        (re.compile(r"\b(\d+)[.,](\d+)\s*км\b", re.I), lambda m: f"{int(round(float(f'{m.group(1)}.{m.group(2)}') * 1000))}м"),
         (re.compile(r"(\d+)\s?хв\b\.?\s?", re.I), r"'\1' хвилин "),
         (re.compile(r"(\d+)\s?шв\b\.?", re.I), r"\1 швидкість"),
         (re.compile(r"\+/-"), "плюс мінус"),
