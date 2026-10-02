@@ -75,7 +75,7 @@ def compile_regex_patterns(config):
             replace_val = item.get('replace')
             if search_val and replace_val is not None:
                 # шукає слово, що ПОЧИНАЄТЬСЯ з цього кореня
-                pattern = re.compile(r"\b" + re.escape(search_val))
+                pattern = re.compile(r"\b" + re.escape(search_val), re.I)
                 tts_replacements.append((pattern, replace_val))
 
     return delete_pattern, url_pattern, tts_replacements
