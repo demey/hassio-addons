@@ -19,6 +19,7 @@ options:
   skip_key_words: []
   delete_key_words: []
   critical_key_words: []
+  tts_dictionary: []
   sync_interval: 6
 schema:
   max_message_length: int(100,600)?
@@ -29,6 +30,8 @@ schema:
   delete_key_words: 
     - str
   critical_key_words: 
+    - str
+  tts_dictionary: 
     - str
   sync_interval: int(4,120)?
 startup: application
