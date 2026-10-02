@@ -67,6 +67,17 @@ def compile_regex_patterns(config):
         # (re.compile(r"(?<!['\d])(\d+)-(\d+)(?!['\d])", re.I), r"'\1'-'\2'"),
     ]
 
+    # 8. Користувацькі фонетичні заміни (tts_dictionary)
+    tts_dict = config.get('tts_dictionary', [])
+    for item in tts_dict:
+        if isinstance(item, dict):
+            search_val = item.get('search')
+            replace_val = item.get('replace')
+            if search_val and replace_val is not None:
+                # шукає слово, що ПОЧИНАЄТЬСЯ з цього кореня
+                pattern = re.compile(r"\b" + re.escape(search_val))
+                tts_replacements.append((pattern, replace_val))
+
     return delete_pattern, url_pattern, tts_replacements
 
 
