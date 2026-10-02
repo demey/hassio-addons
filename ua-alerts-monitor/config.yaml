@@ -31,8 +31,9 @@ schema:
     - str
   critical_key_words: 
     - str
-  tts_dictionary: 
-    - str
+  tts_dictionary:
+    - search: str
+      replace: str
   sync_interval: int(4,120)?
 startup: application
 init: false
