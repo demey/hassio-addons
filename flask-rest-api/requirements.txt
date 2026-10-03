@@ -7,4 +7,5 @@ pytz
 geopy
 alerts-in-ua
 opencv-python-headless
+onnxruntime
 numpy
