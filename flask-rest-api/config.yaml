@@ -14,6 +14,7 @@ hassio_role: manager
 homeassistant_api: true
 map:
   - share:rw
+  - media:rw
 ports:
   5001/tcp: 5001
 startup: system
