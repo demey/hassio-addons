@@ -12,8 +12,6 @@ RUN apt-get update && \
         python3 \
         python3-pip \
         python3-venv \
-        tesseract-ocr \
-        tesseract-ocr-eng \
         libgl1 \
         libglib2.0-0 && \
     pip install --no-cache-dir --break-system-packages -r /tmp/requirements.txt && \
