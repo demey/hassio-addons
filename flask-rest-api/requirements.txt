@@ -8,3 +8,4 @@ geopy
 alerts-in-ua
 opencv-python-headless
 numpy
+onnxruntime
