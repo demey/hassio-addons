@@ -6,6 +6,6 @@ python-aqi
 pytz
 geopy
 alerts-in-ua
-pytesseract
+rapidocr_onnxruntime
 opencv-python-headless
 numpy
