@@ -5,11 +5,8 @@ slug: ha2gd
 description: Sync folders with Google Drive
 url: https://github.com/demey/hassio-addons/tree/master/ha2gd
 arch:
-  - armhf
-  - armv7
   - aarch64
   - amd64
-  - i386
 init: false
 hassio_api: true
 homeassistant_api: true
