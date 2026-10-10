@@ -1,13 +1,23 @@
 import os
 import re
+import sys
 import json
 import time
+import signal
 import logging
 from datetime import datetime, timezone
 import requests
 from bs4 import BeautifulSoup
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+def signal_handler(sig, frame):
+    logging.info("Отримано сигнал зупинки, вимикаємося...")
+    sys.exit(0)
+
+# Реєстрація обробників сигналів
+signal.signal(signal.SIGTERM, signal_handler)
+signal.signal(signal.SIGINT, signal_handler)
 
 def compile_regex_patterns(config):
     """Предкомпіляція регулярних виразів для прискорення обробки тексту."""
