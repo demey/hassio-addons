@@ -5,7 +5,6 @@ slug: flask-rest-api
 description: Flask REST-API functionality
 url: https://github.com/demey/hassio-addons/tree/master/flask-rest-api
 arch:
-  - armv7
   - aarch64
   - amd64
 init: false
