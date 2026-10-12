@@ -1,6 +1,9 @@
 
 # Changelog
 
+## [2026.10.10]
+* Refactor start/stop flow
+
 ## [2026.09.08]
 * Disable curl command in alertsmonitor run script
 * Refactor regex patterns for quantity matching
