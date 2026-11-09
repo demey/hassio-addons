@@ -1,6 +1,9 @@
 
 # Changelog
 
+## [2026.11.09]
+* Add max_message_age_seconds to configuration
+
 ## [2026.10.10]
 * Refactor start/stop flow
 
