@@ -118,7 +118,7 @@ def process_channel(session, channel, config, patterns, skip_sending=False):
         except Exception as e:
             logging.error(f"Error reading state for {channel}: {e}")
 
-    url = f'https://telegram.me/s/{channel}'
+    url = f'https://t.me/s/{channel}'
     if last_message_id > 0:
         url += f'?after={last_message_id}'
 
