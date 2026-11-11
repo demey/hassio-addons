@@ -4,7 +4,7 @@
 # ==============================================================================
 
 main() {
-  exec python3 /usr/bin/monitor.py
+  exec python3 /usr/bin/http-client.py
 }
 
 main "$@"
